@@ -5,7 +5,6 @@
 ## 前言
 
 欢迎来到中国科学院软件研究所和南京理工大学合办的---[**《软件开发平台与应用-机器人操作系统入门》**](https://space.bilibili.com/416516517/channel/detail?cid=108190/)课程，课程还提供[讲义](https://github.com/YunxiangLuo/ros)和ROS部分课程代码示例[软件包](https://github.com/YunxiangLuo/ros/codes)，欢迎南京理工大学的同学们下载、学习和分享。
->>>>>>> a6e2bde6f29a58db0d2149379520b0746e327a9b
 
 本示例包含了XBot机器人和中科院软件博物馆仿真、ROS通信示例程序、导航与SLAM功能演示，在每个软件包下都有相应的功能介绍。
 
