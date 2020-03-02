@@ -29,8 +29,8 @@
 制作启动U盘前需要做的准备
 - 准备U盘（2G以上）
 
-- [下载Rufus](https://github.com/pbatard/rufus/releases/download/v3.8/rufus-3.8.exe
-  [或下载Unetbootin]: https://unetbootin.github.io/)
+- [下载Rufus](https://github.com/pbatard/rufus/releases/download/v3.8/rufus-3.8.exe)
+  或[下载Unetbootin](https://unetbootin.github.io/)
 
 - [下载Ubuntu](https://isrc.iscas.ac.cn/mirror/ubuntu-release/xenial/ubuntu-16.04.4-desktop-amd64.iso)
 
