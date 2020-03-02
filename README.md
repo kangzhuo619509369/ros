@@ -6,6 +6,18 @@
 
 欢迎来到中国科学院软件研究所和南京理工大学合办的---[**《软件开发平台与应用-机器人操作系统入门》**](https://space.bilibili.com/416516517/channel/detail?cid=108190)课程，课程还提供[讲义](https://github.com/YunxiangLuo/ros)，[视频](https://space.bilibili.com/416516517/channel/detail?cid=108190)和ROS部分课程代码示例[软件包](https://github.com/DroidAITech/ROS-Academy-for-Beginners)，欢迎南京理工大学的同学们下载、学习和分享。
 
+## 课程大纲
+[第1章 Linux编程基础](https://github.com/YunxiangLuo/ros/tree/master/chapter1)
+第2章 Pyhton编程基础
+第3章 ROS系统入门
+第4章 ROS工程结构和通信机制
+第5章 ROS⼯具
+第6章 ROSPY
+第7章 TF和URDF
+第8章 SLAM和导航基础
+第9章 机械臂
+第10章 智能服务机器开发项目
+
 本示例包含了XBot机器人和中科院软件博物馆仿真、ROS通信示例程序、导航与SLAM功能演示，在每个软件包下都有相应的功能介绍。
 
 ![Gazebo仿真效果](./robot_sim_demo.gif)
