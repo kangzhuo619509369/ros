@@ -85,3 +85,7 @@
 ![figure_2_10](src/images/figure_2_10.png)
 
 为了方便在程序中输入中文注释，我们键盘布局选择汉语。
+
+**Copyright**
+
+![Logo](../../joint_logo.png)

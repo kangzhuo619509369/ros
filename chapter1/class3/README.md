@@ -1619,3 +1619,7 @@ mv libhello.a ../lib
 ```bash
 gcc main.c -o hello -L./lib -lhello 
 ```
+
+**Copyright**
+
+![Logo](../../joint_logo.png)
