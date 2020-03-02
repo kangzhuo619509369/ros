@@ -30,4 +30,4 @@
 
 ## Copyright
 
-![Logo](./joint_logo.png)
+![Logo](../joint_logo.png)
