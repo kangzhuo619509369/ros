@@ -1620,6 +1620,7 @@ mv libhello.a ../lib
 gcc main.c -o hello -L./lib -lhello 
 ```
 
-**Copyright**
+---
+## Copyright
 
 ![Logo](../../joint_logo.png)

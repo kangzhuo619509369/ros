@@ -693,6 +693,7 @@ lp::7:root,lp
 users::20:root,sam
 ```
 
-**Copyright**
+---
+## Copyright
 
 ![Logo](../../joint_logo.png)
