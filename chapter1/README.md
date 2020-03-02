@@ -16,7 +16,7 @@
 3. Linux操作系统基础知识
 ```
 
-[第一章 第二讲  Ubuntu的安装](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class1)
+[第一章 第二讲  Ubuntu的安装](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class2)
 
 > 2.1  [安装Ubuntu步骤和安装U盘的制作](https://www.bilibili.com/video/av92437186/)
 > 2.2  [安装Ubuntu](https://www.bilibili.com/video/av92550621/)
@@ -32,13 +32,14 @@
 4. 使用Docker部署开发环境
 ```
 
-[第一章 第三讲  VIM和GCC](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class1)
+[第一章 第三讲  VIM和GCC](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class3)
 
 > 3.1  [VIM简介和基础](https://www.bilibili.com/video/av92836456/)
 > 3.2  [VIM使用进阶](https://www.bilibili.com/video/av92892398/)
 > 3.3  [VIM的配置]()
 > 3.4  [GCC简介]()
 > 3.5  [GCC命令]()
+> 3.6  [GDB调试]()
 
 ```
 知识点
@@ -49,6 +50,13 @@
 5. GCC编译过程
 6. GCC命令
 ```
+
+[第一章 第四讲 Makefile](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class4)
+
+[第一章 第五讲 Shell](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class5)
+
+[第一章 第六讲 Git](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class6)
+
 
 ## Copyright
 
