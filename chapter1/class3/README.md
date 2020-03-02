@@ -58,7 +58,7 @@ w 保存文件
 
 vim功能具体参考下图。
 
-![figure_3_1](src/images/figure_3_1.png)
+![figure_3_1](src/images/figure_3_1.jpg)
 
 **任务2. 编程练习**
 
