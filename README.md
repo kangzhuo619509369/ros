@@ -1,10 +1,13 @@
-
 # <center>《软件开发平台与应用-机器人操作系统入门》</center>
 
 ---
 
 ## 前言
+<<<<<<< HEAD
+欢迎来到中国科学院软件研究所和南京理工大学合办的---[**《软件开发平台与应用-机器人操作系统入门》**](https://space.bilibili.com/416516517/channel/detail?cid=108190/)课程，课程还提供[讲义](https://github.com/YunxiangLuo/ros)和ROS部分课程代码示例[软件包](https://github.com/DroidAITech/ROS-Academy-for-Beginners)，欢迎南京理工大学的同学们下载、学习和分享。
+=======
 欢迎来到中国科学院软件研究所和南京理工大学合办的---[**《软件开发平台与应用-机器人操作系统入门》**](https://space.bilibili.com/416516517/channel/detail?cid=108190/)课程，课程还提供[讲义](https://github.com/YunxiangLuo/ros)和ROS部分课程代码示例[软件包](https://github.com/YunxiangLuo/ros/codes)，欢迎南京理工大学的同学们下载、学习和分享。
+>>>>>>> a6e2bde6f29a58db0d2149379520b0746e327a9b
 
 本示例包含了XBot机器人和中科院软件博物馆仿真、ROS通信示例程序、导航与SLAM功能演示，在每个软件包下都有相应的功能介绍。
 
@@ -40,13 +43,14 @@
 1. 克隆或下载ROS-Academy-for-Beginners教学包到工作空间的`/src`目录下，例如 `~/catkin_ws/src`
 ```sh
 $ cd ~/catkin_ws/src
-$ git clone https://github.com/DroidAITech/ROS-Academy-for-Beginners.git
+$ git clone --branch fix_cartographer https://github.com/DroidAITech/ROS-Academy-for-Beginners.git
 ```
 
 2. 安装教学包所需的依赖
 ```sh
 $ cd ~/catkin_ws
 $ rosdep install --from-paths src --ignore-src --rosdistro=kinetic -y  
+# 由于国内防火墙原因，rosdep2020年初无法访问，学生需要手动安装依赖`sudo apt-get install ros-kinetic-包名`
 ```
 
 3. 编译并刷新环境
