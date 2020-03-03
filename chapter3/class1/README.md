@@ -26,7 +26,9 @@
 什么是机器人呢，机器人是自动执行工作的机器装置。它既可以接受人类指挥，又可以运行预先编排的程序，也可以根据以人工智能技术制定的原则纲领行动。它的任务是协助或取代人类工作的工作，例如生产业、建筑业，或是危险的工作。我们可以把它分成三类
 
 1、人造人（Artificial Human）
+
 2、可编程机器（Programmable Machines）
+
 3、感知、思考、动作（Sense Think Act）
 
 **人工智能和机器人的关系**
@@ -100,11 +102,11 @@ Atlas双足机器人
 什么是ROS呢？我们首先看看ROS能做些什么？下面这个视频是2017年底ROS官方发布的。
 
 <video src="./src/videos/Video_1.2.1.MP4"></video>
-![ROS](src/images/Figure_1.2.1.PNG)
+![ROS](src/images/Figure_1.2.1.png)
 
 这些高大上的产品。都用到了一个共同的运行支撑软件，或者叫软件工具集，那就是我们的这门课的主题机器人操作系统ROS，Robot Operating System， R-O-S是它的缩写。大家可能会问了，为什么我们要用ROS来开发机器人呢？
 
-![制造工程](src/images/Figure_1.2.2.PNG)
+![制造工程](src/images/Figure_1.2.2.png)
 
 之前造一个机器人很麻烦，我们要设计机械结构、画电路板、然后写硬件驱动、设计通信架构、还要组装硬件和调试、最后是编写各种各样的上层算法。大家可以想象一下工作量有多大。所以机器人工程师很辛苦的，且进入门槛高。
 
@@ -112,27 +114,27 @@ Atlas双足机器人
 
 我们希望机器人零部件厂商，比如机械臂、底盘、摄像头、激光雷达的这些生产厂商们都在一个通用的“机器人软件平台”上进行开发，开发者买回来，直接就能用，这是最好的。对不对？
 
-![通用平台](src/images/Figure_1.2.4.PNG)
+![通用平台](src/images/Figure_1.2.4.png)
 
 所以说，机器人领域也出现一个ROS这样的平台，其实是早晚的事。ROS事实上已经成为机器人界的主流操作系统。今天的机器人上跑的ROS，就是八九十年代PC上的Winows和Mac。那有了机器人操作系统ROS，机器人开发和使用就变得相对简单和高效，我们程序员再也不用担心去造轮子了。
 
-![ros平台](src/images/Figure_1.2.5.PNG)
+![ros平台](src/images/Figure_1.2.5.png)
 
 **ROS发展史**
 
 说完了为什么要用ROS，下面我们来看下ROS的发展史,ROS已经有大约十年的历史。其实最早啊，大概是2000几年，斯坦福大学，有一个人工智能实验室做机器人项目，它们开发的一套机器人软件系统框架，后来成为了ROS的前身，那说到这里必须提到一个人，美籍华裔人工智能专家吴恩达教授，他的早期工作就是参与了这个项目。
 
-![ros起源](src/images/Figure_1.2.6.PNG)
+![ros起源](src/images/Figure_1.2.6.png)
 
-![柳树车库](src/images/Figure_1.2.7.PNG)
+![柳树车库](src/images/Figure_1.2.7.png)
 
 2007年ROS项目由柳树车库Willow Garage组织发起。这个组织很厉害，像PCL点云库和OpenCV，他们都是发起者或主要代码贡献者，此外我们机器人的业界标杆，PR2，也是他们开发的。
 
-![ROS版本](src/images/Figure_1.2.8.PNG)
+![ROS版本](src/images/Figure_1.2.8.png)
 
 2007年之后，ROS就逐渐流行开来，到现在已经有了十多个版本，像Indigo、Jade、Kinetic、Melodic。
 
-![LTS](src/images/Figure_1.2.9.PNG)
+![LTS](src/images/Figure_1.2.9.png)
 
 每个ROS版本都是依附于对应的Ubuntu版本的，比如Indigo和Ubuntu 14.04对应，Kinetic和Ubuntu16.04对应，Melodic和Ubuntu 18.04对应。目前用的人最多的版本，就是后面这两个，他们是Long term support长期支持版，官方的维护时间是5年，其他的ROS版本是两年。我们教学演示采用的ROS版本为Kinetic，我也建议各位同学安装Ubuntu16.04和ROS Kinetic。
 
@@ -234,7 +236,7 @@ https://q.droid.ac.cn/
 
 XBot-U教学机器人
 
-![xbot](src/images/Figure_1.3.1.PNG)
+![xbot](src/images/Figure_1.3.1.png)
 
 - 配套课程
 - 提供实验室解决方案
