@@ -82,7 +82,7 @@ my.o: my.c b.h
 
 **例子**
 
-**1.**对比gcc编译：`gcc hello.c –o hello`与Makefile方式：使用GNU make工具编译程序：`make`，需要编写Makefile,内容如下：
+1. 对比gcc编译：`gcc hello.c –o hello`与Makefile方式：使用GNU make工具编译程序：`make`，需要编写Makefile，内容如下：
 
 ```shell
 #Makefile的内容
@@ -90,7 +90,7 @@ hello:hello.c
 	gcc hello.c -o hello
 ```
 
-两种方式的区别？
+2. 两种方式的区别？
 
 - gcc是编译器，make不是。make是依赖于Makefile来编译多个源文件的工具，在Makefile里同样是用gcc(或者别的编译器)来编译程序。
 
