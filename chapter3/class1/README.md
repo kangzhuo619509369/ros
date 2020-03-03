@@ -247,7 +247,7 @@ XBot-U教学机器人
 课程使用XBot-U教学机器人进行实验，提供实验室解决方案。Xbot机器人使用NUC主机，操作系统安装请参考
 https://developer.ubuntu.com/core/get-started/intel-nuc
 
-**学生机安装Ubuntu**
+**学生机安装Ubuntu(已安装者可省略)**
 
 **软硬件要求**
 
