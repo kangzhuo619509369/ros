@@ -1,4 +1,4 @@
-## 7.3 机械臂的Moveit!gazebo仿真
+## 9.3 机械臂的Moveit!gazebo仿真
 
 **本讲重点**
 
@@ -22,9 +22,9 @@
 - 完善机器人模型
 - 构建Moveit!+Gazebo仿真
 
-### 7.3.1 ROS中的控制器插件
+### 1. ROS中的控制器插件
 
-#### 7.3.1.1 ros_control介绍
+#### 1.1 ros_control介绍
 
 ![图片1](src/images/图片1.png)
 
@@ -32,7 +32,7 @@
 
 ros_control是ros是用户提供的应用与真实机器人之间的中间件，ros_control提供了一系列控制器接口、传动装置接口、硬件接口、控制器工具箱等等。 它可以帮助机器人应用功能快速落地，提高开发效率。
 
-#### 7.3.1.2 ros中control框架
+#### 1.2 ros中control框架
 
 ![图片2](src/images/图片2.png)
 
@@ -46,7 +46,7 @@ ros_control是ros是用户提供的应用与真实机器人之间的中间件，
 
 第四，Transmissions（传动装置）：transmission可以理解成机器人中的传动装置，包括电机和减速器等，用来提供机械臂关节转动时的动力。
 
-#### 7.3.1.3 controllers与ros_control
+#### 1.3 controllers与ros_control
 
 ![图片3](src/images/图片3.png)
 
@@ -56,11 +56,11 @@ ros_control是ros是用户提供的应用与真实机器人之间的中间件，
 
 ros_control通过硬件接口向硬件发送和接受命令，常见有Joint Command Interfaces、Joint State Interface等。
 
-### 7.3.2 完善机械臂模型
+### 2. 完善机械臂模型
 
 那么在我们了解了ROS中的Control之后，我们就需要完善我们的机械臂模型，在给他们加上更完善的物理属性的基础上给他们也加上ROS驱动需要的控制器。
 
-#### 7.3.2.1 xacro文件基本介绍
+#### 2.1 xacro文件基本介绍
 
 **文件位置：magician/urdf/magician.xacro**
 
@@ -94,7 +94,7 @@ ros_control通过硬件接口向硬件发送和接受命令，常见有Joint Com
 
 其中，在magician.gazebo文件中引入gazebo插件，定义了模型的颜色，摩擦系数等；materials.xacro文件中则定义了一些要用到的颜色的rgbd值。通过这样的方式，我们可以使主要的模型描述文件看起来更加精简，代码的层次结构更加清晰。
 
-#### 7.3.2.3 为Link添加惯性参数与碰撞检测属性
+#### 2.2 为Link添加惯性参数与碰撞检测属性
 
 **文件位置：magician/urdf/magician.xacro**
 
@@ -132,7 +132,7 @@ ros_control通过硬件接口向硬件发送和接受命令，常见有Joint Com
 
 这里的碰撞系数，我们直接设置为模型本身，没有对其膨胀。这里我们完全可以去创建一个这个link的碰撞检测模型，并在这里加载。不同形状的物体的惯性矩阵的计算方法不尽相同，因为我们对这些参数要求不高，所以这里不去详细研究如何计算；机械臂的质量和惯性矩阵会对gazebo中的模型的稳定性产生影响，为了使导入gazebo后模型运行会比较稳定，我们用了一个小技巧，就是把link的质量设置得很小而惯性矩阵设置得比较大，在我们对物体的碰撞效果、摩擦、反弹等物理属性要求不高的时候，我们就可以这么做，这也是gazebo仿真中比较常见的一个问题。
 
-#### 7.3.2.4 为joint添加传动装置
+#### 2.3 为joint添加传动装置
 
 **文件位置：magician/urdf/magician.xacro**
 
@@ -175,7 +175,7 @@ ros_control通过硬件接口向硬件发送和接受命令，常见有Joint Com
 
 这里，我们把机械臂连杆部分的硬件接口类型设置为PositionJointInterface，把电机的减速比设为"1“
 
-#### 7.3.2.5 添加gazebo控制器插件
+#### 2.4 添加gazebo控制器插件
 
 **文件位置：magician/urdf/magician.gazebo**
 
@@ -193,7 +193,7 @@ ros_control通过硬件接口向硬件发送和接受命令，常见有Joint Com
 
 Gazebo控制器插件可以设置的参数有很多，这里对几个主要参数进行了设置：robotNamespace：机器人命名空间，把它设置为机械臂的名称，当有多个机器人时方便区分。robotSimType：机器人仿真类型，用来完成上层下发到机器人模型的命令的转换，这里选择了默认的机器人硬件抽象层接口。
 
-#### 7.3.2.6 在gazebo中加载机器人模型
+#### 2.5 在gazebo中加载机器人模型
 
 **文件位置： magician/launch/arm_bringup_gazebo.launch**
 
@@ -240,11 +240,11 @@ Gazebo控制器插件可以设置的参数有很多，这里对几个主要参�
 
 在arm_world.launch文件中，首先启动了gazebo仿真环境并设置了一些相关的参数；然后调用gazebo_ros功能包中的spawn_model节点，根据robot_description参数对应的模型文件产生模型，并放到gazebo仿真环境中进行显示。
 
-### 7.3.3 构建Moveit!+Gazebo仿真
+### 3. 构建Moveit!+Gazebo仿真
 
 这样呢我们就完善了我们的模型，那有个完整的模型我们还要让模型动起来，而且是通过moveit驱动动起来。所以下面我们就再来介绍怎么样才能吧Moveit与azebo仿真连接起来。
 
-#### 7.3.3.1 Moveit!机器人控制框架
+#### 3.1 Moveit!机器人控制框架
 
 ![图片4](src/images/图片4.png)
 
@@ -262,7 +262,7 @@ Gazebo控制器插件可以设置的参数有很多，这里对几个主要参�
 
 Gazebo中的模型或者真实机械臂就会根据这些关节空间的路径点，先进行一个细插补，然后进行位置伺服来驱动电机运动，同时将机器人的状态数据反馈回Moveit!确认机器人是否达到目标位置，形成闭环控制。
 
-#### 7.3.3.2 Moveit!+Gazebo仿真框架
+#### 3.2 Moveit!+Gazebo仿真框架
 
 ![图片7](src/images/图片7.png)
 
@@ -270,7 +270,7 @@ Gazebo中的模型或者真实机械臂就会根据这些关节空间的路径�
 
 两端的插件接口中间通过action 这样的交互接口来进行通讯，两端的action一定要保持一致。另外一点就是编写插件的套路，首先需要去编写一个配置文件，然后去编写一个launch文件，启动控制器插件节点，并且加载这里的配置文件。
 
-#### 7.3.3.3 Moveit!配置
+#### 3.3 Moveit!配置
 
 **配置文件**
 
@@ -304,7 +304,7 @@ controller_list:
 这里会在dobot_moveit_config这个包里 的magician_moveit_controller_manager.launch.xml
 文件中加载刚才的controllers.yaml文件，并把所有的参数加载到参数服务器中。
 
-#### 7.3.3.4 gazebo端配置
+#### 3.4 gazebo端配置
 
 **配置文件**
 
@@ -360,7 +360,7 @@ magician:
 
 launch文件中将上述的yaml文件加载到参数服务器中。此外，这个launch文件还 调用controller_manager包 根据参数文件内容启动相应的controller，同时将关节状态转换为TF变换并发布。至此，Moveit+Gazebo仿真环境就搭建好了。
 
-#### 7.3.3.5 Moveit!+gazebo启动文件配置
+#### 3.5 Moveit!+gazebo启动文件配置
 
 ```
 <!-- moveit launch file -->
@@ -388,7 +388,7 @@ launch文件中将上述的yaml文件加载到参数服务器中。此外，这�
 
 首先是加载了 我们完善了的机械臂模型文件magician.xacro。然后是启动了一个空白的gazebo仿真环境，当然也加载了一些参数到参数服务器中，我们之前也看过这个arm_world.launch文件了。接着又启动了配置好控制接口的gazebo启动文件。最后也就是我上一页ppt添加的东西，启动了Moveit！的各种节点。
 
-#### 7.3.3.6 视频演示
+#### 3.6 视频演示
 
 当然在启动之前，需要编译一下。
 
@@ -401,7 +401,7 @@ launch文件中将上述的yaml文件加载到参数服务器中。此外，这�
 运行$  roslaunch magician arm_gripper_gazebo.launch  就可以同时启动moveit与gazebo了
 
 <video src=".\src\video\arm_gripper.mp4"></video>
-### 7.3.4 小结
+### 4. 小结
 
 ![图片8](src/images/图片8.png)
 

@@ -1,4 +1,4 @@
-# 4.2 ROSPY（下）
+# 6.2 ROSPY（下）
 
 本讲我们继续详细讲解和练习ROSPY。
 
@@ -18,7 +18,7 @@
 - 熟练使用ROSPY时间进行编程
 - 熟练使用ROSPY Topic进行编程
 
-## 4.2.1 Param
+## 1. Param
 
 1. 获取参数
 
@@ -281,7 +281,7 @@ chmod u+x param_demo2.py
 roslaunch param_demo param_demo.launch
 ```
 
-## 4.2.2 如何获取命令行参数
+## 2. 如何获取命令行参数
 
 接下来我们学习和练习如何获取命令行参数，`args = rospy.myargv(argv=sys.argv)`用于rospy获取程序执行时后面跟着的参数。`method = args[1]`，是将第一个参数赋值给变量`method`，其中`args[0]`是程序名，`arg[2]`是第二个参数。
 
@@ -371,7 +371,7 @@ if __name__ == '__main__':
 roslaunch actiontest arg_demo.launch
 ```
 
-## 4.2.3 日志的使用
+## 3. 日志的使用
 
 ROS为开发者提供了一套日志记录和输出系统，这套系统的实现方式是基于topic，也就是每个节点都会把一些日志信息发到一个统一的topic上去，这个topic就是`/rosout`。`/rosout`本身也是一个node，它专门负责进行日志的记录。我们在启动master的时候，系统就会附带启动`/rosout`。下面依次介绍日志级别、日志API和日志的使用。
 
@@ -508,7 +508,7 @@ while True:
   `rospy.logerr("%s returned the invalid value %s", other_name, other_value)`
 
 
-## 4.2.4 时间的使用
+## 4. 时间的使用
 
 ROS里经常用到的一个功能就是时钟，比如计算机器人移动距离、设定一些程序的等待时间、设定计时器等等。ROSPY同样给我们提供了时钟方面的操作。
 
@@ -643,7 +643,7 @@ Timer实例会每2秒调用my_callback
 
 - 调用shutdown()关闭
 
-## 4.2.5 ROSPY强化练习
+## 5. ROSPY强化练习
 
 例子：更改激光雷达的参数以及将`/scan`消息remap到`/rplidar_scan`以提供cut_scan.py使用，位于xbot_bringup程序包的launch文件夹中
 
@@ -1538,7 +1538,7 @@ rosrun service_robot_demo xbot_client.py
 vim ~/.bashrc
 ```
 
-​```bash
+```bash
 export ROS_MASTER_URI=http://192.168.8.101:11311
 #export ROS_MASTER_URI=http://127.0.0.1:11311
 export ROS_HOSTNAME=192.168.8.xxx
@@ -1547,7 +1547,7 @@ export ROS_HOSTNAME=192.168.8.xxx
 
 启动XBot
 
-```bash
+​```bash
 roslaunch xbot_bringup xbot-u.launch 
 ```
 

@@ -1,4 +1,4 @@
-# 6.4 Navigation简介
+# 8.3 Navigation简介
 
 **本讲重点**
 
@@ -15,7 +15,7 @@
 - 了解地图map_server
 - 了解航迹推测法、AMCL算法等定位基础知识
 
-## 6.4.1 Navigation介绍
+## 1. Navigation介绍
 
 首先对导航的原理和Navigation Stack的框架结构进行简单的介绍。Navigation是机器人最基本的功能之一，简单来说，导航就是机器人基于地图，实现从起点A前进到终点B的过程，这个过程中要求不发生碰撞并满足自身动力学模型。我们将导航的任务进行细分，首先机器人在未知环境中需要使用激光传感器（或者是深度传感器）进行地图建模，然后根据构建的地图进行定位，有了地图和定位的基础，就可以根据指定位置以及感知的障碍物信息进行路径规划与导航了。
 
@@ -89,9 +89,9 @@ Navigation Stack是一个ROS的功能包集，里面包含了ROS在路径规划�
 
 上图中的`amcl`包用于定位是通过环境信息确定小车在地图的位置，`map_server`用于提供已知地图。`xxx_planner`是路径规划插件，`xxx_recovery`是异常行为处理的插件，它们都是`move_base`的插件，`costmap_2d`是2d代价栅格地图，用来表示地图中的障碍物，`move_base`包含了导航核心`node`。
 
-## 6.4.2 move_base
+## 2. move_base
 
-### 6.4.2.1 move_base介绍
+### 2.1 move_base介绍
 
 `move_base`是`navigation`里负责导航的`node`，它负责全局规划，局部规划和处理异常行为处理。`move_base`节点位于导航框架正中心，可以理解为一个强大的路径规划器，在实际的导航任务中，只需要启动这个`node`，并且给它提供数据，就可以规划出路径和速度。从`navigation`的角度，`map`是已知信息默认是已经解决了。
 
@@ -130,7 +130,7 @@ package `nav_core`定义了这三个接口（类），然后各自继承和实�
 
 `BaseGlobalPlanner`是全局导航的接口，规定一个功能函数`makePlan`，给定起始跟目标，输出路径(一系列pose)走过去；`BaseLocalPlanner`规定了一个核心函数`computeVelocityCommands`是计算局部地图内的下一步控制指令（线速度，角速度）；还有一个`RecoveryBehavior`，规定一个`runBehavior`，在小车卡住情况下执行运动恢复，回到正常的导航状态。
 
-### 6.4.2.2 global_planner
+### 2.2 global_planner
 
 **global_planner 原理与实现**
 
@@ -146,7 +146,7 @@ Dijkstra（迪杰斯特拉）是global_planner中算法，它是典型的用来�
 
 通过设置的代价potential[next_i] + distance * neutral_cost_代表了A*的核心思想，寻找距离start和goal代价距离都最少的点。 A* 算法是策略寻路，不保证一定是最短路径。Dijkstra算法是全局遍历，确保运算结果一定是最短路径。 Dijkstra需要载入全部数据，遍历搜索。
 
-### 6.4.2.3 local_planner
+### 2.3 local_planner
 下面介绍move_base中的局部规划。
 
 **local_planner原理与实现**
@@ -206,7 +206,7 @@ Dijkstra（迪杰斯特拉）是global_planner中算法，它是典型的用来�
 
 `dwa_local_planner::DWAPlannerROS`对象是`dwa_local_planner::DWAPlanner`对象的ROS封装，在初始化时指定的ROS命名空间使用，继承了`nav_core::BaseLocalPlanner`接口。其整个逻辑顺序就是`computeVelocityCommands->findBestTrajectory –>createTrajectories –> generateTrajectory`，最终，选择分数最低的轨迹，发布出去。这便是整个局部规划器的实现思路和逻辑。
 
-### 6.4.2.4 costmap
+### 2.4 costmap
 
 ROS里面的地图，`map`，是一个topic，里面就用来存放当前的地图信息。`costmap`，它和`map`类型相同，都是`occupancygrid`类型，你也可以说它是一种加工过的`map`，把`map`加工就成了`costmap`。但是`costmap`和`map`的用途不一样，`costmap`是专门用来路径规划的，是路径规划器的输入信息，而`map`是SLAM的一个结果。`costmap`是一张2维地图，把三维空间的障碍物投影到水平面上，也就是说即使传感器看到的障碍物是一个圆柱体立在那里，`costmap`也都是一张水平的代价地图。`costmap`可以分成多层，具体有多少层是由你来指定的，不同的层次用于不同的任务分工。比如说通常我们会把地图分成`static layer`，`obstacle layer`，`inflation layer`等，`static layer`是一个全局的静态地图，比如我们之前跑SLAM算法所建立的2维地图，直接提供给`navigation stack`使用。`static layer`会默认订阅`/map` topic，存储不变的信息。`Obstacle layer`地图是根据传感器扫描到的障碍物所生成的地图，可以是激光雷达扫到的平面障碍物，也就是`laserscan`类型的数据，或者是深度摄像头扫到的三维点云，`POintCloud`类型的数据，那这个三维点云就会被投影成一个2维地图，所以这一层就是用来标记障碍物的。`Inflation layer`是进一步在一些致命障碍物（可能发生碰撞的障碍物）周围进行膨胀，然后生成了`inflation layer`，这张`costmap`就可以用来计算路径的cost了。
 
@@ -344,7 +344,7 @@ plugins:
 
 上图是`inflationLayer`的工作流程。`updateBounds`阶段由于本层没有维护的map，所以维持上一层地图调用的Bounds值（处理区域）；`updateCosts`阶段用了一个`CellData`结构存储`master map`中每个grid点的信息，其中包括这个点的二维索引和这个点附近最近的障碍物的二维索引。改变每个障碍物CELL附近前后左右四个CELL的cost值，更新到`master map`就完成了障碍物的膨胀。
 
-## 6.4.3 map_server
+## 3. map_server
 
 导航框架中，`map_server`是作为一个可选的`node`位于右上角。
 
@@ -500,7 +500,7 @@ rosrun map_server map_server  my_map.yaml
 rosrun map_sever  map_saver  [-f my_map]```
 ```
 
-## 6.4.4 定位
+## 4. 定位
 
 机器人定位即让机器人知道自己在哪，简单来说，定位需要解决的问题是让机器人在知道地图信息的情况下利用传感器信息确定自己的位置（Localization）。
 
@@ -509,7 +509,7 @@ rosrun map_sever  map_saver  [-f my_map]```
 
 ![41](images/Figure_4.2.png)
 
-### 6.4.2 定位技术简介
+### 4.1 定位技术简介
 
 **定位技术分类**
 
@@ -537,7 +537,7 @@ rosrun map_sever  map_saver  [-f my_map]```
 
 ![46](images/Figure_4.7.png)
 
-### 6.4.3 航迹推测法
+### 4.2 航迹推测法
 
 **Dead Reckoning/导航推测**
 
@@ -551,7 +551,7 @@ rosrun map_sever  map_saver  [-f my_map]```
 
 ![48](images/Figure_4.9.png)
 
-#### 编码器航迹推测法
+#### 4.2.1 编码器航迹推测法
 
 下图的码盘是常用的传感器，类似于车辆里程计，记录车轮转数，获得机器人相对于上一采样时刻状态改变量。
 
@@ -575,7 +575,7 @@ rosrun map_sever  map_saver  [-f my_map]```
 
 ![59](images/Figure_4.13.png)
 
-#### 惯性测量单元航迹推测法
+#### 4.2.2 惯性测量单元航迹推测法
 
 **惯性测量单元简介**
 
@@ -597,7 +597,7 @@ IMU惯性测量单元，由加速度计和陀螺仪组成，加速度计可以�
 
 其中 w和a分别表示角速度和线加速度，k为当前时刻，Vk为k时刻的速度， Pk为k时刻的累积位移， ΔΦ为角度值。需要注意的是，公式成立的条件是:移动机器人做直线运动。
 
-### 6.4.4 AMCL算法
+### 4.3 AMCL算法
 
 1. 蒙特卡洛法和粒子滤波
 

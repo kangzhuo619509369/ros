@@ -1,5 +1,5 @@
 
-# 2.2 ROS通信机制
+# 4.2 ROS通信机制
 
 大家好，本讲我们介绍ROS的通信机制和常见命令。
 
@@ -38,7 +38,7 @@
 
 ![ros1](src/images/Figure_3.4.png)
 
-## 2.2.1 节点
+## 1. 节点
 
 在ROS里要启动大量的进程，首先需要有一个管家来管理这些进程，这个管家叫做master。
 
@@ -192,7 +192,7 @@ ROS的通信方式大致可以分为话题、服务、动作和参数服务器�
 - Actionlib
 - Parameter Service
 
-## 2.2.2 话题
+## 2. 话题
 
 Topic（话题）是ROS用的最多的一种通信方式，两个node之间要通信，一般会先定义好一个共同的话题，然后节点a向这个话题publish消息，node b 会subscribe订阅这个话题，那么a说话b就能收到。
 
@@ -359,7 +359,7 @@ geometry_msgs/Vector3 angular
 | msg         | rosmsg              |
 | .launch文件 | roslaunch           |
 
-## 2.2.3 练习
+## 3. 练习
 
 **练习1**
 

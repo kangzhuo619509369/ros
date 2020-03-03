@@ -1,5 +1,5 @@
 
-# 4.1 ROSPY（上）
+# 6.1 ROSPY（上）
 
 从本讲开始，我们介绍ROSPY。
 
@@ -17,7 +17,7 @@
 
 本讲分成两部分内容，首先是介绍ROSPY相关函数，之后演示ROSPY的例子。
 
-## 4.1.1 ROSPY相关函数
+## 1. ROSPY相关函数
 
 ROSPY的官方文档中可以看到ROSPY里有很多submodule子模块、很多的类以及函数，你可能感觉ROSPY文档层次不分明，实现的代码有点乱，没关系，这里把常用的函数列在下表。在ROS程序里，首先`import rospy`，然后就可以使用`rospy.init_node`来初始化node了。
 
@@ -424,7 +424,7 @@ if __name__='__main__':
       param_demo()
 ```
 
-## 4.1.2 ROSPY练习
+## 2. ROSPY练习
 
 下面我们结合XBot机器人来做些练习。
 

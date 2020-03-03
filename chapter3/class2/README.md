@@ -1,5 +1,5 @@
 
-# 1.2 常用开发和代码管理工具
+# 3.2 常用开发和代码管理工具
 
 第二讲介绍一下Ubuntu下的常用开发和代码管理工具VIM，Roboware Studio和Git。
 
@@ -15,7 +15,7 @@
 - 了解ROS IDE工具Roboware Studio的使用方法，使用XBot ROSPY进行练习，熟练相关操作
 - 了解代码管理工具Git的使用方法
 
-## 1.2.1 VIM
+## 1. VIM
 
 很多场景下并不适合使用图形化编程工具，比如通过ssh远程登陆到机器时。vim是一个万能的编辑器，正好适用于这种场合，将一些最常用的操作烂熟于心，你会发现编辑效率会得到非常大的提升。所有的Unix /linux系统都会内建vi文书编辑器，其他的文书编辑器则不一定会存在。但是目前我们使用比较多的是vim编辑器。vim具有程序编辑的能力，可以主动的以字体颜色辨别语法的正确性，方便程序设计。vi/vim的区别简单点来说，它们都是多模式编辑器，不同的是vim是vi的升级版本，它不仅兼容vi的所有指令，而且还有一些新的特性在里面，例如语法加亮。
 
@@ -426,7 +426,7 @@ python rotate.py
 </launch>
 ```
 
-## 1.2.2 Roboware Studio
+## 2. Roboware Studio
 
 1. 点击Roboware Studio图标打开软件，点击`new workspace`，新建工作区。
 
@@ -628,7 +628,7 @@ python forward.py
 
 注： echo $ROS_PACKAGE_PATH可以查看系统包含的package路径。
 
-## 1.2.3 代码管理Git
+## 3. 代码管理Git
 
 这一部分我们介绍一下github中下载与上传操作，gitHub是一个面向开源项目代码管理平台，因为只支持git，作为唯一的版本库格式进行托管，故名gitHub。使用ROS系统，需要用到许多数据包，有些时候你需要使用的ROS数据包并没有Debian包的形式，这时你需要从数据源安装它。代码开发人员通常使用的有三种主流的版本控制系统：SVN，Git和Mercurial。如何使用Git来下载你需要的代码资源呢？ 首先要说明的是在github上只能clone一个完整的项目，为了保证一个项目的完整性，github不允许仅clone单个件或文件夹。
 
