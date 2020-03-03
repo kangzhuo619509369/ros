@@ -9,13 +9,13 @@
 ## 课程大纲
 [第1章 Linux编程基础](https://github.com/YunxiangLuo/ros/tree/master/chapter1)
 第2章 Pyhton编程基础
-第3章 ROS系统入门
-第4章 ROS工程结构和通信机制
-第5章 ROS⼯具
-第6章 ROSPY
-第7章 TF和URDF
-第8章 SLAM和导航基础
-第9章 机械臂
+[第3章 ROS系统入门](https://github.com/YunxiangLuo/ros/tree/master/chapter3)
+[第4章 ROS工程结构和通信机制](https://github.com/YunxiangLuo/ros/tree/master/chapter4)
+[第5章 ROS⼯具](https://github.com/YunxiangLuo/ros/tree/master/chapter5)
+[第6章 ROSPY](https://github.com/YunxiangLuo/ros/tree/master/chapter6)
+[第7章 TF和URDF](https://github.com/YunxiangLuo/ros/tree/master/chapter7)
+[第8章 SLAM和导航基础](https://github.com/YunxiangLuo/ros/tree/master/chapter8)
+[第9章 机械臂](https://github.com/YunxiangLuo/ros/tree/master/chapter9)
 第10章 智能服务机器开发项目
 
 本示例包含了XBot机器人和中科院软件博物馆仿真、ROS通信示例程序、导航与SLAM功能演示，在每个软件包下都有相应的功能介绍。
