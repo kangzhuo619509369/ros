@@ -4,7 +4,7 @@
 
 ## 前言
 
-欢迎来到中国科学院软件研究所和南京理工大学合办的---[**《软件开发平台与应用-机器人操作系统编程技术》**](https://github.com/YunxiangLuo/ros)课程，课程还提供[讲义](https://github.com/YunxiangLuo/ros)，[视频](https://space.bilibili.com/416516517/channel/detail?cid=108190)和ROS部分课程代码示例[软件包](https://github.com/DroidAITech/ROS-Academy-for-Beginners)，欢迎南京理工大学的同学们下载、学习和分享。
+欢迎来到中国科学院软件研究所和南京理工大学合办的---[**《软件开发平台与应用-机器人操作系统编程技术》**](https://github.com/YunxiangLuo/ros)课程，课程还提供[讲义](https://github.com/YunxiangLuo/ros)，[视频](https://space.bilibili.com/416516517/channel/detail?cid=108190)和ROS部分课程代码示例[软件包](https://github.com/YunxiangLuo/roscode)，欢迎南京理工大学的同学们下载、学习和分享。
 
 ## 课程大纲
 [第1章 Linux编程基础](https://github.com/YunxiangLuo/ros/tree/master/chapter1)
