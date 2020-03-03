@@ -165,7 +165,7 @@ clean:
 
 ## 4. 隐晦规则
 
-GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个`[.o]`文件后都写上类似的命令，因为，我们的make会自动识别，并自己推导命令。**只要make看到一个[.o]文件，它就会自动的把[.c]文件加在依赖关系中，如果make找到一个whatever.o，那么whatever.c，就会是whatever.o的依赖文件。**并且` cc -c whatever.c`也会被推导出来，于是，我们的`Makefile`再也不用写得这么复杂。
+GNU的make很强大，它可以自动推导文件以及文件依赖关系后面的命令，于是我们就没必要去在每一个`[.o]`文件后都写上类似的命令，因为，我们的`make`会自动识别，并自己推导命令。只要`make`看到一个`[.o]`文件，它就会自动的把`[.c]`文件加在依赖关系中，如果make找到一个`whatever.o`，那么`whatever.c`，就会是`whatever.o`的依赖文件。并且`cc -c whatever.c`也会被推导出来，于是，我们的`Makefile`再也不用写得这么复杂。
 
 我们一起看一个示例
 
@@ -252,7 +252,7 @@ $(CC) $(CCFLAGS) $(CPPFLAGS) –c –o $@ $<
 
 在`Makefile`中使用`include`关键字可以把别的`Makefile`包含进来，这很像C语言中的`#include`，被包含的文件会原模原样的放在当前文件的包含位置。
 
-例如有这样几个Makefile：a.mk b.mk c.mk，还有这样一个文件foo.make，以及一个变量$(bar)，其中包含了e.mk和f.mk，那么下面的语句：
+例如有这样几个`Makefile`：`a.mk b.mk c.mk`，还有这样一个文件`foo.make`，以及一个变量`$(bar)`，其中包含了`e.mk`和`f.mk`，那么下面的语句：
 
 ```bash
 include foo.make *.mk $(bar)
