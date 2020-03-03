@@ -16,7 +16,7 @@
 [第7章 TF和URDF](https://github.com/YunxiangLuo/ros/tree/master/chapter7)
 [第8章 SLAM和导航基础](https://github.com/YunxiangLuo/ros/tree/master/chapter8)
 [第9章 机械臂](https://github.com/YunxiangLuo/ros/tree/master/chapter9)
-第10章 智能服务机器开发项目
+第10章 深度学习
 
 本示例包含了XBot机器人和中科院软件博物馆仿真、ROS通信示例程序、导航与SLAM功能演示，在每个软件包下都有相应的功能介绍。
 
