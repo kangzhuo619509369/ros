@@ -1,0 +1,3 @@
+PROJECT(HELLO)
+SET(SRC_LIST main.c hello.c)
+ADD_EXECUTABLE(hello ${SRC_LIST})

@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/leiyunfei/playground/demo2/hello.c
+stdio.h
+-
+hello.h
+/home/leiyunfei/playground/demo2/hello.h
+
+/home/leiyunfei/playground/demo2/hello.h
+
+/home/leiyunfei/playground/demo2/main.c
+hello.h
+/home/leiyunfei/playground/demo2/hello.h
+

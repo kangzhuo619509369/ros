@@ -1,0 +1,3 @@
+/home/leiyunfei/playground/demo2/CMakeFiles/edit_cache.dir
+/home/leiyunfei/playground/demo2/CMakeFiles/rebuild_cache.dir
+/home/leiyunfei/playground/demo2/CMakeFiles/hello.dir
