@@ -53,9 +53,11 @@
 
 [第一章 第四讲 Makefile](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class4)
 
-[第一章 第五讲 Shell](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class5)
+[第一章 第五讲 GDB](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class5)
 
-[第一章 第六讲 Git](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class6)
+[第一章 第六讲 Shell](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class6)
+
+[第一章 第七讲 Git](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class7)
 
 
 ## Copyright
