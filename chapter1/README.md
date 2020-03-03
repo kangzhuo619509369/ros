@@ -36,9 +36,9 @@
 
 > 3.1  [VIM简介和基础](https://www.bilibili.com/video/av92836456/)
 > 3.2  [VIM使用进阶](https://www.bilibili.com/video/av92892398/)
-> 3.3  [VIM的配置]()
-> 3.4  [GCC简介]()
-> 3.5  [GCC命令]()
+> 3.3  [VIM的配置](https://www.bilibili.com/video/av92990449)
+> 3.4  [GCC简介](https://www.bilibili.com/video/av93039839)
+> 3.5  [GCC命令](https://www.bilibili.com/video/av93048218)
 > 3.6  [GDB调试]()
 
 ```
