@@ -48,13 +48,39 @@
 3. VIM的配置和插件使用
 4. GCC简介
 5. GCC编译过程
-6. GCC命令
+6. GCC编译命令
 ```
 
 [第一章 第四讲 Makefile](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class4)
 
-[第一章 第五讲 GDB](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class5)
+> 4.1  [Makefile简介和基础]()
+> 4.2  [Makefile进阶]()
+> 4.3  [Automake]()
+> 4.4  [Cmake]()
+> 4.5  [Catkinmake]()
 
+```
+知识点
+1. Makefile
+2. Automake
+3. Cmake
+4. Catkinmake
+```
+
+[第一章 第五讲 程序调试](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class5)
+
+> 5.1  [单线程调试——GDB]()
+> 5.2  [多线程调试——GDB]()
+> 5.3  [内存错误——Valgrind]()
+> 5.4  [内存泄漏——Valgrind]()
+
+```
+知识点
+1. 单线程调试——GDB
+2. 多线程调试——GDB
+3. 内存错误——Valgrind
+4. 内存泄漏——Valgrind
+```
 [第一章 第六讲 Shell](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class6)
 
 [第一章 第七讲 Git](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class7)
