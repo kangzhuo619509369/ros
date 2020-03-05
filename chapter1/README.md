@@ -38,7 +38,7 @@
 > 3.2  [VIM使用进阶](https://www.bilibili.com/video/av92892398/)
 > 3.3  [VIM的配置](https://www.bilibili.com/video/av92990449)
 > 3.4  [GCC简介](https://www.bilibili.com/video/av93039839)
-> 3.5  [GCC命令]()
+> 3.5  [GCC命令](https://www.bilibili.com/video/av93810112)
 
 ```
 知识点
@@ -52,11 +52,10 @@
 
 [第一章 第四讲 Makefile](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class4)
 
-> 4.1  [Makefile简介和基础]()
+> 4.1  [Makefile简介](https://www.bilibili.com/video/av93809755)
 > 4.2  [Makefile进阶]()
-> 4.3  [Automake]()
-> 4.4  [Cmake]()
-> 4.5  [Catkinmake]()
+> 4.3  [Cmake]()
+> 4.4  [Catkin_make]()
 
 ```
 知识点
