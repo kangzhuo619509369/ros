@@ -4,7 +4,7 @@
 
 [第一章 第一讲  Linux简介](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class1)
 
-> 1.1  [Linux简介]()
+> 1.1  [Linux简介](https://www.bilibili.com/video/av93722935)
 > 1.2  [Linux目录结构](https://www.bilibili.com/video/av92228523/)
 > 1.3  [Linux文件属性](https://www.bilibili.com/video/av92320985/)
 > 1.4  [Linux文件和用户管理](https://www.bilibili.com/video/av92357239/)
