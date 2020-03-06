@@ -1770,6 +1770,8 @@ mv libhello.a ../lib
 gcc main.c -o hello -L./lib -lhello 
 ```
 
+使用C++编程的同学建议参考[CppCoreGuidelines](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md)
+
 ---
 ## Copyright
 
