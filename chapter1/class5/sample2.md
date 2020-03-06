@@ -206,7 +206,7 @@ Here's what the fix should look like:
 `while``(n>0) ``//doesn't let n reach 0``{``  ``result*=n;``  ``n--;        ``//decrements only after the evaluation``}`
 ```
 
-## GDB in Conclusion
+### GDB in Conclusion
 
 You have now seen enough to try GBD out on your own. Some important topics have not been touched upon here for the sake of simplicity, such as dealing with [segmentation faults and other kinds of crashes](https://www.cprogramming.com/debugging/segfaults.html) or using tools like [Valgrind](https://www.cprogramming.com/debugging/valgrind.html) to find memory leaks.
 
