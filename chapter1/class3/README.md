@@ -968,6 +968,156 @@ vim +PluginInstall +qall
 
 要求：使用安装插件后的vim，重新编写第二部分的程序。
 
+###  3.7 插件列表
+
+**基础插件**
+
+| 插件                                    | 用途         |
+| --------------------------------------- | ------------ |
+| gmarik/vundle, L9                       | 包管理       |
+| The-NERD-tree                           | 目录树       |
+| ctrlpvim/ctrlp.vim, dyng/ctrlsf.vim     | 快速搜索     |
+| bling/vim-airline                       | 状态栏美化   |
+| zenorocha/dracula-theme’,{‘rtp’:’vim/’} | 配色         |
+| terryma/vim-multiple-cursors.git        | 多光标       |
+| rking/ag.vim， dkprice/vim-easygrep’    | 搜索         |
+| Lokaltog/vim-easymotion                 | 搜索定位     |
+| Plugin ‘TaskList.vim                    | 任务列表     |
+| mbbill/undotree                         | 撤销修改     |
+| Yggdroot/indentLine                     | 缩进提示     |
+| kien/rainbow_parentheses.vim            | 括号高亮     |
+| jiangmiao/auto-pairs，surround.vim      | 括号补全     |
+| terryma/vim-expand-region               | 扩展选择区域 |
+
+**开发插件**
+
+| 插件                                                       | 用途                   |
+| ---------------------------------------------------------- | ---------------------- |
+| editorconfig/editorconfig-vim                              | 代码风格               |
+| mattn/gist-vim, tpope/vim-fugitive, airblade/vim-gitgutter | git                    |
+| scrooloose/nerdcommenter                                   | 代码注释               |
+| Valloric/YouCompleteMe                                     | 智能补全               |
+| scrooloose/syntastic                                       | 代码检查               |
+| Chiel92/vim-autoformat                                     | 代码格式化             |
+| honza/vim-snippets                                         | 代码段提示             |
+| rizzatti/dash.vim, KabbAmine/zeavim.vim                    | 帮助文档               |
+| DoxygenToolkit.vim                                         | 注释工具               |
+| Tagbar                                                     | 代码导航               |
+| gtags.vim                                                  | global导航             |
+| a.vim                                                      | 头文件和源文件快速跳转 |
+| fatih/vim-go                                               | go                     |
+| vim-flake8                                                 | python                 |
+| mattn/emmet-vim                                            | web                    |
+
+**插件在`.vimrc`中的配置**
+
+以下代码没有`vundle`基础部分代码
+
+```bash
+"包管理
+Plugin 'gmarik/vundle'
+Plugin 'L9'
+"Plugin 'junegunn/vim-plug'
+"目录树
+Plugin 'The-NERD-tree'
+"快速搜索
+"Plugin 'FuzzyFinder'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'dyng/ctrlsf.vim'
+"状态栏
+if ! has('python')
+    Plugin 'bling/vim-airline'
+elseif has('mac')
+    source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+    set laststatus=2
+else
+    source /usr/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+endif
+"Plugin 'Lokaltog/vim-powerline.git'
+"多光标
+Plugin 'terryma/vim-multiple-cursors.git'
+
+"主题配色
+"Plugin 'molokai'
+Plugin 'zenorocha/dracula-theme',{'rtp':'vim/'}
+"Plugin 'tango.vim'
+
+"搜索定位
+Plugin 'Lokaltog/vim-easymotion'
+"搜索
+Plugin 'rking/ag.vim'
+Plugin 'dkprice/vim-easygrep'
+"任务列表
+Plugin 'TaskList.vim'
+"撤销树
+Plugin 'mbbill/undotree'
+"缩进提示
+Plugin 'Yggdroot/indentLine'
+"Plugin 'nathanaelkane/vim-indent-guides'
+"括号高亮
+Plugin 'kien/rainbow_parentheses.vim'
+"括号补全
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'surround.vim'
+" 扩展选择区域
+Plugin 'terryma/vim-expand-region'
+
+" editorconfig
+Plugin 'editorconfig/editorconfig-vim'
+
+"头文件和源文件快速跳转
+Plugin 'a.vim'
+"代码检查
+Plugin 'scrooloose/syntastic'
+"git
+Plugin 'mattn/gist-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+"代码注释
+Plugin 'scrooloose/nerdcommenter'
+"golang
+Plugin 'fatih/vim-go'
+"python
+Plugin 'vim-flake8'
+"web
+Plugin 'mattn/emmet-vim'
+
+"代码导航
+Plugin 'Tagbar'
+
+"global导航
+Plugin 'gtags.vim'
+
+"帮助文档
+"Plugin 'Keithbsmiley/investigate.vim'
+Plugin 'DoxygenToolkit.vim'
+
+if has("mac")
+    Plugin 'rizzatti/dash.vim'
+else
+    Plugin 'KabbAmine/zeavim.vim'
+endif
+
+
+"代码段提示
+Plugin 'honza/vim-snippets'
+if has("python")
+    Plugin 'SirVer/ultiSnips'
+endif
+
+"代码格式化
+if has("python")
+    Plugin 'Chiel92/vim-autoformat'
+endif
+
+"代码提示
+if v:version < 703
+    Plugin 'clang-complete'
+else
+    Plugin 'Valloric/YouCompleteMe'
+endif
+```
+
 ## 4. GCC简介
 
 C语言程序写好后，需要编译成为可运行的文件，gcc应运而生。GNU在开发免费操作系统过程中开发几个广为流传的软件，其中最著名的是 GNU C Complier，gcc。gcc是历史上最优秀的C语言编译器， 其执行效率与一般的编译器相比平均效率要高 20%~30%。gcc是自由软件，一旦有用户发现错误，会通知 Richard Stallman，所以几乎每个月都可以推出新版本。然而，它还有一个十分特殊而且不同寻常的意义，几乎所有的自由软件都是通过它编译的。可以说，它是自由软件发展的基石与标杆。现在，gcc 已经可以支持 7 种编程语言和 30 种编程结构，是学术界最受欢迎的编译工具。
