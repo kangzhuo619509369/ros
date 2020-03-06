@@ -656,3 +656,189 @@ make
   > ```
 
   将源文件编译成可执行程序
+
+## 11. catkin_make 与cmake
+
+程序在`cmake`编译的流程： `cmake`指令依据你的`CMakeLists.txt `文件,生成makefiles文件,make再依据此makefiles文件编译链接生成可执行文件.
+
+catkin_make是将cmake与make的编译方式做了一个封装的指令工具, 规范了工作路径与生成文件路径.
+
+#### 11. cmake标准流程
+
+```
+ $ mkdir build  
+$ cd build  
+$ cmake ..  
+$ make  
+$ make install  # (可选)  
+```
+
+#### 11.2 catkin_make 的流程
+
+```
+# In a catkin workspace  $ catkin_make  
+$ catkin_make install  # (可选)  
+如果源码不在默认工作空间,需要指定编译路径:  
+  
+# In a catkin workspace  
+$ catkin_make --source my_src  
+$ catkin_make install --source my_src  # (optionally) 
+```
+
+## 12. catkin_make
+
+### 12.1 catkin_make默认的路径信息
+
+```
+catkin_make运行后终端输出文件部分解析  
+  
+#基本路径  
+Base path: /home/user/catkin_ws  
+Source space: /home/user/catkin_ws/src   
+Build space: /home/user/catkin_ws/build  
+Devel space: /home/user/catkin_ws/devel  
+Install space: /home/user/catkin_ws/install  
+  
+  
+#catkin_make 封装运行中cmake运行的情况  
+Running command: "cmake /home/user/catkin_ws/src -DCATKIN_DEVEL_PREFIX=/home/user/catkin_ws/devel   
+-DCMAKE_INSTALL_PREFIX=/home/user/catkin_ws/install" in "/home/user/catkin_ws/build"    
+  
+#编译工具查找  
+-- Using CATKIN_DEVEL_PREFIX: /tmp/catkin_ws/devel  
+-- Using CMAKE_PREFIX_PATH: /opt/ros/groovy  
+-- This workspace overlays: /opt/ros/groovy  
+  
+#编译的包  
+<pre name="code" class="cpp">#catkin_make 封装运行中make运行的情况
+```
+
+`Running command: "make -j4" in "/home/user/catkin_ws/build"`
+
+
+### 12.2  ros工作空间
+
+```
+    workspace_folder/        --WORKSPACE  工作空间
+      src/                   --SOURCE SPACE  源空间
+        CMakeLists.txt/      --This is symlinked to catkin/cmake/toplevel.cmake  
+        package_1/  
+          CMakeLists.txt  
+          package.xml  
+        ...  
+        package_n/  
+          CMakeLists.txt  
+          package.xml  
+      build/                 --BUILD SPACE 编译空间 (this is where build system is invoked, not necessarily within workspace)  
+        CATKIN_IGNORE        --Marking the folder to be ignored when crawling for packages (necessary when source   
+                                space is in the root of the workspace, the file is emtpy)  
+                                #此选项可用于忽略某个包编译  
+     devel/                 --DEVEL SPACE 开发空间(targets go here, parameterizable, but defaults to peer of Build Space)  
+                               # 生成二值 库 可执行文件   
+        bin/  
+        etc/  
+        /include/  
+        lib/  
+        share/  
+        .catkin              --Marking the folder as a development space (the file contains a semicolon separated list of Source space paths)  
+                                #  
+        env.bash  
+        setup.bash  
+        setup.sh  
+        ...  
+      install/               --INSTALL SPACE 安装空间[-DCMAKE_INSTALL_PREFIX=/any/directorycmake默认是/usr/local](this is where installed targets for test installations go, not necessarily within workspace)  
+        bin/  
+        etc/  
+        include/  
+        lib/  
+        share/  
+        .catkin              --Marking the folder as an install space (the file is emtpy)  
+        env.bash  
+        setup.bash    -- Environment setup file for Bash shell  
+        setup.sh      -- Environment setup file for Bourne shell   
+        ...  
+      
+      
+    /  系统安装空间         /opt/ros/ROSDISTRO
+      opt/  
+        ros/  
+          groovy/  
+            setup.bash -- Environment setup file for Bash shell  
+            setup.sh   -- Environment setup file for Bourne shell  
+            setup.zsh  -- Environment setup file for zshell  
+            ...  结果空间    source RESULT-SPACE/setup.sh     类似扫描安装空间与开发空间,替换系统通用下的对应文件.
+```
+catkin_make小结
+
+```
+src/       --SOURCE SPACE  源空间
+build/     --BUILD SPACE 编译空间
+devel/     --DEVEL SPACE 开发空间
+/opt/ros/kinetic  --ROS系统安装空间
+```
+
+### 12.3 Overlays]
+
+catkin支持包的逐层覆盖, 当前最高,其它依据source的顺序逐层变高, 高层可覆盖低层.  
+
+```bash
+Example 4: Overlaying workspace 3 on top of local workspace2 install space on top of workspace1 devel space on top of system install  
+      
+cd ~/workspace2/build  
+cmake -DCMAKE_INSTALL_PREFIX=~/ws2_installed ../src  
+make  
+make install  
+      
+source ~/ws2_installed/setup.bash  
+      
+cd ~/workspace3/build  
+cmake ../src  
+make  
+```
+
+ros 环境变量设置 可以参考
+
+```bash
+source /opt/ros/kinetic/setup.bash    
+source /home/yhzhao/slam_ws/devel/setup.bash    
+    
+export ROS_PACKAGE_PATH=~/slam_ws/src:$ROS_PACKAGE_PATH    
+export ROS_WORKSPACE=~/slam_ws/src    
+```
+
+### 12.4  catkin_make编译指定的包
+
+`$ catkin_make -DCATKIN_WHITELIST_PACKAGES="package1;package2"`
+
+恢复编译所有的包
+
+`$ catkin_make -DCATKIN_WHITELIST_PACKAGES=""`
+
+**3. 对这句命令进行解释：**
+
+```
+catkin build rovio --cmake-args -DCMAKE_BUILD_TYPE=Release -DMAKE_SCENE=ON
+```
+
+**catkin build – Build Packages，编译rovio包**
+
+如果工作空间未初始化，可以自动完成工作空间初始化 （`source ~/catkin_ws/devel/setup.bash）`
+It  is used to build one or more packages in a catkin workspace. If a  workspace is not yet initialized（初始化）, build can initialize it with the  default configuration（默认配置）, but only if it is called from the workspace  root. Specific workspaces can also be built from arbitrary working  directories with the --workspace option.
+
+```cmake
+--cmake-args    #cmake参数-DCMAKE_BUILD_TYPE=Release
+```
+
+使用 CMake我们可以生成 debug 版和 release 版的程序。debug 版的项目生成的可执行文件需要有调试信息并且不需要进行优化,而 release 版的不需要调试信息但需要优化。这些特性在 gcc/g++ 中是通过编译时的参数来决定的,如果将优化程度调到最高需要设置参数-O3,最低是 -O0 即不做优化;添加调试信息的参数是 -g -ggdb ,如果不添加这个参数,调试信息就不会被包含在生成的二进制文件中。
+
+CMake 中有一个变量 CMAKE_BUILD_TYPE ,可以的取值是 Debug、 Release、 RelWithDebInfo 和 MinSizeRel。当这个变量值为 Debug 的时候,CMake 会使用变量 CMAKE_CXX_FLAGS_DEBUG 和 CMAKE_C_FLAGS_DEBUG 中的字符串作为编译选项生成 Makefile ,当这个变量值为 Release 的时候,工程会使用变量 CMAKE_CXX_FLAGS_RELEASE 和 CMAKE_C_FLAGS_RELEASE 选项生成 Makefile。
+
+现假设项目中只有一个文件 main.cpp ,下面是一个可以选择生成 debug 版和 release 版的程序的 CMakeList.txt 
+
+```cmake
+PROJECT(main)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6) 
+SET(CMAKE_SOURCE_DIR .) 
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")    SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall") AUX_SOURCE_DIRECTORY(. DIR_SRCS) 
+ADD_EXECUTABLE(main ${DIR_SRCS}) 
+```
