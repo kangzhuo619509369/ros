@@ -412,3 +412,62 @@ The program no longer exists.
 ```
 
 GNU调试器是所有程序员工具库中的一个功能非常强大的工具。本讲只介绍了gdb的一小部分功能。要了解更多知识，建议您阅读GNU调试器手册。
+
+### 1.5.1 GDB分析实例1
+
+```cpp
+#include <iostream>
+using namespace std;  
+
+int divint(int, int);  
+int main() 
+{ 
+   int x = 5, y = 2; 
+   cout << divint(x, y); 
+   
+   x =3; y = 0; 
+   cout << divint(x, y); 
+   
+   return 0; 
+}  
+
+int divint(int a, int b) 
+{ 
+   return a / b; 
+}   
+```
+
+[Debug讲解](./sample1.md)
+
+### 1.5.2 GDB分析实例2
+
+```cpp
+#include<iostream>
+ 
+using namespace std;
+ 
+long factorial(int n);
+ 
+int main()
+{
+    int n(0);
+    cin>>n;
+    long val=factorial(n);
+    cout<<val;
+    cin.get();
+    return 0;
+}
+ 
+long factorial(int n)
+{
+    long result(1);
+    while(n--)
+    {
+        result*=n;
+    }
+    return result;
+}
+```
+
+[Debug讲解](./sample2.md)
+
