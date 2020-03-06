@@ -695,7 +695,7 @@ users::20:root,sam
 
 ## 4. Linux常用命令列表
 
-### **4.1 软件安装 **
+### **4.1 软件安装**
 
 查看软件xxx安装内容
  **#dpkg -L xxx**
@@ -1174,15 +1174,15 @@ t 运行时可置GID
 
 以eth0为例
 1. 以DHCP方式配置网卡
-  编辑文件/etc/network/interfaces:
-  #sudo vi /etc/network/interfaces
-  并用下面的行来替换有关eth0的行:
-  auto eth0
-  iface eth0 inet dhcp
-  用下面的命令使网络设置生效:
-  #sudo /etc/init.d/networking restart
-  当然,也可以在命令行下直接输入下面的命令来获取地址
-  #sudo dhclient eth0
+    编辑文件/etc/network/interfaces:
+    #sudo vi /etc/network/interfaces
+    并用下面的行来替换有关eth0的行:
+    auto eth0
+    iface eth0 inet dhcp
+    用下面的命令使网络设置生效:
+    #sudo /etc/init.d/networking restart
+    当然,也可以在命令行下直接输入下面的命令来获取地址
+    #sudo dhclient eth0
 
 **2. 为网卡配置静态IP地址**
  编辑文件/etc/network/interfaces:
