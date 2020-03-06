@@ -53,7 +53,7 @@
 [第一章 第四讲 Makefile](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class4)
 
 > 4.1  [Makefile简介](https://www.bilibili.com/video/av93809755)
-> 4.2  [Makefile进阶](https://www.bilibili.com/video/av93893014)
+> 4.2  [Makefile进阶](https://www.bilibili.com/video/av93893014/)
 > 4.3  [Cmake]()
 > 4.4  [Catkin_make]()
 
