@@ -68,7 +68,7 @@
 [第一章 第五讲 程序调试](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class5)
 
 > 5.1  [单线程调试——GDB](https://www.bilibili.com/video/av94352186)
-> 5.2  [多线程调试——GDB]()
+> 5.2  [多线程调试——GDB](https://www.bilibili.com/video/av94650336)
 > 5.3  [内存错误——Valgrind]()
 > 5.4  [内存泄漏——Valgrind]()
 
