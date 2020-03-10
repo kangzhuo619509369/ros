@@ -2,8 +2,7 @@
 
 ---
 
-###### 学习目标 ######
-掌握Python语言基础语法，为后续ROS和人工智能编程打下基础。
+学习目标：掌握Python语言基础语法，为后续ROS和人工智能编程打下基础。
 
 [第二章 第一讲  Python入门](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class1)
 
