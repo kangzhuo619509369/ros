@@ -8,7 +8,7 @@
 
 ## 课程大纲
 [第1章 Linux编程基础](https://github.com/YunxiangLuo/ros/tree/master/chapter1)
-第2章 Pyhton编程基础
+[第2章 Pyhton编程基础](https://github.com/YunxiangLuo/ros/tree/master/chapter2)
 [第3章 ROS系统入门](https://github.com/YunxiangLuo/ros/tree/master/chapter3)
 [第4章 ROS工程结构和通信机制](https://github.com/YunxiangLuo/ros/tree/master/chapter4)
 [第5章 ROS⼯具](https://github.com/YunxiangLuo/ros/tree/master/chapter5)
