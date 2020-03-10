@@ -79,9 +79,33 @@
 3. 内存错误——Valgrind
 4. 内存泄漏——Valgrind
 ```
-[第一章 第六讲 Shell](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class6)
+[第一章 第六讲 Shell](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class6)第三章 
+
+> 6.1  [Shell编程基础]()
+> 6.2  [Shell编程实例]()
+> 6.3  [Shell系统管理]()
+> 6.4  [Shell网络管理]()
+
+```
+知识点
+1. Shell编程基础
+2. Shell编程实例
+3. Shell系统管理
+4. Shell网络管理
+```
 
 [第一章 第七讲 Git](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class7)
+
+> 7.1  [Git和版本控制简介]()
+> 7.2  [Git常用命令]()
+> 7.3  [Gitlab Server]()
+
+```
+知识点
+1. Git和版本控制简介
+2. Git常用命令
+3. Gitlab Server
+```
 
 
 ## Copyright
