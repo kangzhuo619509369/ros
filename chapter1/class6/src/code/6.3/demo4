@@ -1,0 +1,5 @@
+#!/bin/bash
+for line in $(cat demo1)
+do
+        echo $line | tr a-z A-Z   
+done

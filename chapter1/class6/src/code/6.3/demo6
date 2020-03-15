@@ -1,0 +1,3 @@
+#!/bin/bash
+mkdir ~/backup1
+tar -jcf  ~/backup1/log_back.tar.bz2  .

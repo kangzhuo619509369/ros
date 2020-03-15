@@ -1,0 +1,3 @@
+#!/bin/bash
+tar -jxf ~/backup1/log_back.tar.bz2  -C  /tmp
+rm ~/backup1/log_back.tar.bz2

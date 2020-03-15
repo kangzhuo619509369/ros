@@ -1,0 +1,5 @@
+#!/bin/bash
+cat demo1 | while read line
+do
+    echo $line
+done
