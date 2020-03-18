@@ -81,7 +81,7 @@
 ```
 [第一章 第六讲 Shell](https://github.com/YunxiangLuo/ros/tree/master/chapter1/class6)第三章 
 
-> 6.1  [Shell编程基础]()
+> 6.1  [Shell编程基础](https://www.bilibili.com/video/av97123706)
 > 6.2  [Shell编程实例](https://www.bilibili.com/video/av96506652)
 > 6.3  [Shell系统管理](https://www.bilibili.com/video/av96557280)
 > 6.4  [Shell网络管理](https://www.bilibili.com/video/av96504112)
