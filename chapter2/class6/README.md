@@ -242,3 +242,7 @@ s = reduce(a1,j1)
 print(s,type(s))
 ```
 
+---
+## Copyright
+
+![Logo](../../joint_logo.png)

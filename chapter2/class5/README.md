@@ -239,7 +239,10 @@ print(op)
 
 
 
+---
+## Copyright
 
+![Logo](../../joint_logo.png)
 
 
 

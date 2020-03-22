@@ -275,7 +275,7 @@ print(s1)
     - ```python
       f = open("user.txt","w",encoding="utf-8")
       #write()  向对应的文件中写入文件
-      f.write("有纹身的都怕热，镶金牙的爱咧嘴")
+      f.write("早诊断、早隔离、早治疗")
       #close()  关闭文件
       f.close()
       ```
@@ -284,7 +284,7 @@ print(s1)
 
     - ```python
       f = open("user.txt","a",encoding="utf-8")
-      f.write("金星说：“人不犯我，我不犯人，人若犯我，礼让三分，人若再犯，斩草除根")
+      f.write("钟南山说：“输入病例的感染性很强，一点都不能放松")
       # 写操作   是将要写入的内容先写到缓冲区
           # 当程序运行结束        自动写入
           # 当文件关闭            自动写入
@@ -350,3 +350,8 @@ with open("user.txt","a+") as f:
         # whence = 2    以结尾为参考位置  (3.x取消了此项功能)
     print(result)
 ```
+
+---
+## Copyright
+
+![Logo](../../joint_logo.png)

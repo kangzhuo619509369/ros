@@ -341,5 +341,8 @@ print(dict1.values())
 # print(dict1)
 ```
 
+---
+## Copyright
 
+![Logo](../../joint_logo.png)
 

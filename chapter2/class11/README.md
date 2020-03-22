@@ -1,6 +1,6 @@
 # 1.12 面向对象
 
-**类的引入的好处**
+**类的好处**
 
 之前我们学过了函数，函数的好处是，把功能封装起来，以便我们后边可以随时的调用，但是这些都可以说是面向过程变成，他注重的是结果，而我们今天所讲的面向对象它更注重程序的过程，比方说我们现在有一个人走在一条长达一千米的公路上，如果他的行走速度为两米每秒，那他需要多长时间呢？如果用面向过程来解释的话那就直接用1000/2，我们就可以得到结果了，但是如果我们用面向对象来解释的话，我们可以在程序中创建一条长达1000米的公路，然后再创建一个人，设置它的行走速度为两米每秒，然后让程序去运算它会走多少时间，它更加注重过程了，这就是面向对象！
 
@@ -121,25 +121,25 @@ if __name__ == '__main__':
 
 ```python
 """
-1、封装坏蛋类用以存储坏蛋的信息
-2、坏蛋拥有人的一切正常属性和功能
-3、坏蛋有恶习属性和作恶方法
-4、创建一个坏蛋，为他设置最基本信息和恶习
-5、让他作恶
+1、封装英雄类用以存储英雄的信息
+2、英雄拥有人的一切正常属性和功能
+3、英雄有英雄属性和英雄方法
+4、创建一个英雄，为他设置最基本信息
+5、让他做好事
 """
 ```
 
 ```python
-from day12.person import Person
-class Bastard(Person):
+from class11.person import Person
+class hero(Person):
 
-    def __init__(self,name,age,rmb,badhobby):
+    def __init__(self,name,age,rmb,courageous_acts):
         # 拓展父类属性
         super().__init__(name,age,rmb)
         # self.name = name
         # self.age = age
         # self.rmb = rmb
-        self.badhobby = badhobby
+        self.courageous_acts = courageous_acts
 
     # 父类方法重写
     # def tell(self):
@@ -157,7 +157,7 @@ class Bastard(Person):
     #           (self.name,self.age,self.rmb,self.badhobby))
 
 if __name__ == '__main__':
-    b = Bastard("张三",20,200,"喝酒打架")
+    b = hero("钟南山",84,20000,"救新冠肺炎患者")
     b.tell()
     # b.talk()
 ```
@@ -167,14 +167,14 @@ if __name__ == '__main__':
 需求：
 1、封装男人类，继承于person类
 2、封装女人类，继承于person类
-3、封装gay类，使之同时具有男人和女人的特性
+3、封装gongong类，使之同时具有男人和女人的特性
 4、令其咆哮，令其撒娇
 5、令其偏阳刚的进行自我介绍，令其偏阴柔的进行自我介绍
 """
 ```
 
 ```python
-from day12.person import Person
+from class11.person import Person
 class Man(Person):
 
     def tell(self):
@@ -182,7 +182,7 @@ class Man(Person):
               (self.name, self.age, self.rmb))
 
     def paoxiao(self):
-        print("┗|｀O′|┛ 嗷~~，劳资就是天下第一！")
+        print("嗷~~，老子天下第一！")
 
 class Women(Person):
 
@@ -191,9 +191,9 @@ class Women(Person):
               (self.name, self.age, self.rmb))
 
     def sajiao(self):
-        print("喵~~~ 你真讨厌了啦！")
+        print("讨厌了啦！")
 
-class Gay(Women,Man):
+class Gonggong(Women,Man):
     pass
 
 # m = Man("史泰龙",50,3000)
@@ -204,10 +204,14 @@ class Gay(Women,Man):
 # w.tell()
 # w.sajiao()
 
-g = Gay("库克",45,10000000)
+g = Gonggong("李连英",45,10000000)
 g.tell()
 g.talk()
 g.paoxiao()
 g.sajiao()
 ```
 
+---
+## Copyright
+
+![Logo](../../joint_logo.png)

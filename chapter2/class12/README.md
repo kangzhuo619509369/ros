@@ -206,14 +206,14 @@ finally:
 
 - **python中的错误其实就是class，所有的错误都继承baseexception,所以我们在捕获的时候，它捕获了该类型的错误，并且它还把子类一网打尽**
 
-  - ```python
+   ```python
     try:
         print(1/0)
     except BaseException as e:
         print("异常1")
     except ZeroDivisionError as e:
         print("异常2")
-    ```
+   ```
 
 - **有些错误无法捕获**
 
@@ -223,7 +223,7 @@ finally:
 
 - **跨越多层调用**:
 
-  - ```python
+   ```python
     def func1(num):
         print(1/num)
     def func2(num):
@@ -235,7 +235,7 @@ finally:
     except ZeroDivisionError as e:
         print("*****")
     #Main调用了func2,func2调用了func1,但是出现错误的是func1，这个时候只要main捕获到了就可以处理
-    ```
+   ```
 
 ## 3. pickle模块
 
@@ -277,7 +277,10 @@ with open("user.txt","rb") as f:
     print(content)
 ```
 
+---
+## Copyright
 
+![Logo](../../joint_logo.png)
 
 
 
