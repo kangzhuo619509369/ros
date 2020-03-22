@@ -72,8 +72,6 @@
 ```
 掌握time和异常处理方法。
 ```
-time和异常处理
-
 ## Copyright
 
 ![Logo](../joint_logo.png)
