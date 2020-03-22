@@ -1,0 +1,8 @@
+python有无数种数据类型。
+python有六大类标准数据类型：
+    1.Number类型  数字类型
+    2.String类型  字符串类型
+    3.List类型    列表类型
+    4.Tuple类型   元组类型
+    5.Set类型     集合类型
+    6.Dict类型    字典类型

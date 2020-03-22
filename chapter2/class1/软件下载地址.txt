@@ -1,0 +1,11 @@
+python官网：
+	https://www.python.org/
+
+python 3.7下载地址：
+	https://www.python.org/downloads/release/python-370b1/
+
+pycharm官网：
+	https://www.jetbrains.com
+
+pycharm下载地址：
+	https://www.jetbrains.com/pycharm/
