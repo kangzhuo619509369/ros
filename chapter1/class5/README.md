@@ -1,8 +1,6 @@
-# 1.5 GDB
+# 1.5 程序调试
 
-本讲知识点
-1. GDB参数
-2. GDB程序调试方法
+## 1. GDB
 
 GDB是一个由GNU开源组织发布的、Unix/Linux操作系统下的、基于命令行的、功能强大的程序调试工具。GDB中的命令固然很多，但我们只需掌握其中十个左右的命令，就大致可以完成日常的基本的程序调试工作。
 
@@ -413,7 +411,7 @@ The program no longer exists.
 
 GNU调试器是所有程序员工具库中的一个功能非常强大的工具。本讲只介绍了gdb的一小部分功能。要了解更多知识，建议您阅读GNU调试器手册。
 
-### 1.5.1 GDB分析实例1
+### 1.1 GDB分析实例1
 
 ```cpp
 #include <iostream>
@@ -439,7 +437,7 @@ int divint(int a, int b)
 
 [Debug讲解](./sample1.md)
 
-### 1.5.2 GDB分析实例2
+### 1.2 GDB分析实例2
 
 ```cpp
 #include<iostream>
@@ -470,4 +468,474 @@ long factorial(int n)
 ```
 
 [Debug讲解](./sample2.md)
+
+## 2. 内存错误和内存泄漏
+
+virgrind可以用来检测程序开发中的绝大多数内存，函数、缓存使用、多线程竞争访问内存、堆栈问题，是一个Linux下功能非常强大内存检测工具。
+
+- valgrind-tool=<name> 最常用的选项。运行valgrind中名为toolname的工具。默认memcheck。
+
+- memcheck:这是valgrind应用最广泛的工具，一个重量级的内存检查器，能够发现开发中绝大多数内存错误问题，比如：使用未初始化的内存，使用已经释放了的内存，内存访问越界等。下面将重点介绍此功能。
+
+- callgrind: 主要用来检查程序中函数调用过程中出现的问题。
+
+- cachegrind: 主要用来检查程序中缓存使用出现的问题。
+
+- helgrind: 主要用来检查多线程程序中出现的竞争问题。
+
+- massif: 主要用来检查程序中堆栈使用中出现的问题。
+
+- extension: 可以利用core提供的功能，自己编写特定的内存调试工具。
+
+
+### 2.1 valgrind memcheck
+
+#### 2.1.1 memcheck内存检测原理
+
+**valid-value表**
+对于进程的整个地址空间中的每一个字节(byte)，都有与之对应的8个bits，对于CPU的每个寄存器，也有一个与之对应的bit向量。这些bits负责记录该字节或者寄存器值是否具有有效的、已经初始化的值。
+
+**valid-Address表**
+对于进程整个地址空间中的一个字节(byte)，还有与之对应的1bit，负责记录该地址是否能够被读写。
+
+**内存检测原理**
+当要读写内存中的某个字节时，首先检查这个字节对应的address  bit。如果该address  bit显示该位置是无效位置，memcheck则报告内存读写错误。valgrind内核相当于一个虚拟的CPU环境，当内存中的某个字节被加载到真实的CPU中时，该字节对应的value  bit也被加载到虚拟的CPU环境中，一旦寄存器中的值，被用来产生内存地址，或者该值能够影响程序的输出，则mencheck会检查对应的value  bits，如果该值尚未初始化，则会报告使用未初始化内存错误。
+
+### 2.2 memcheck内存检测
+
+#### 2.2.1源码
+
+创建gdbmem.cpp源码文件，准备待检测的代码如下：
+
+```cpp
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include<pthread.h>
+#include<string.h>
+
+//memory access overflow
+char* stringcopy(char* psrc)
+{
+    int len = strlen(psrc) + 1;
+    char* pdst = (char*)malloc(len);//12
+    memset(pdst, 0, len * 2);//13
+    memcpy(pdst, psrc, len*2);//14
+    return pdst;
+}
+
+//array assess overflow
+void printarray(int arry[], int arrysize)
+{
+    int i = 0;
+    for(; i < arrysize; i++)
+    //for(i = arrysize-1; i >= 0; i--)
+    {
+        printf("arry[%d]:%d\n",i, arry[i]);
+    }
+    printf("arry[%d]:%d\n",i+1, arry[i+1]);//27
+}
+
+//main body
+int main(int narg, const char** args)
+{
+    char* pwildptr;
+    char* pstr = "this is a memory debug program!\n";
+    int array[10] = {1,2,3,4,5,6,7,8,9,10};
+    char* ptmp = stringcopy(pstr);//36
+    //memory leak
+    char* ptmp2 = (char*)malloc(100);//38
+    memset(ptmp2, 0, 100);
+    // memory write overflow
+    printf(ptmp);//41
+    // array tip assess overflow
+    printarray(array, 10);//43
+    free(ptmp);//44
+    printf("%p", pwildptr);//45
+    //wild ptr copy
+    memcpy(ptmp, ptmp2, 20);//47
+    printf(ptmp);//48
+    return 0;
+}
+```
+
+#### 2.2.2 编译
+
+```shell
+g++ -o gdbmem gdbmem.o
+```
+
+编译后将在当前目录下生成gdbmem可执行文件。
+
+#### 2.2.3 valgrind内存检测
+
+valgring 对gdbmem进行内存检测
+
+```shell
+$ valgrind --tool=memcheck --leak-check=full --track-fds=yes ./gdbmem
+==10668== Memcheck, a memory error detector
+==10668== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==10668== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==10668== Command: ./gdbmem
+==10668== 
+==10668== Invalid write of size 8
+==10668==    at 0x4C3453F: memset (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x40075D: stringcopy(char*) (gdbmem.cpp:13)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668==  Address 0x5204060 is 32 bytes inside a block of size 33 alloc'd
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+==10668== Invalid write of size 1
+==10668==    at 0x4C34558: memset (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x40075D: stringcopy(char*) (gdbmem.cpp:13)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668==  Address 0x5204080 is 16 bytes after a block of size 48 in arena "client"
+==10668== 
+==10668== Invalid write of size 8
+==10668==    at 0x4C326CB: memcpy@@GLIBC_2.14 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400778: stringcopy(char*) (gdbmem.cpp:14)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668==  Address 0x5204060 is 32 bytes inside a block of size 33 alloc'd
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+==10668== Invalid write of size 2
+==10668==    at 0x4C32723: memcpy@@GLIBC_2.14 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400778: stringcopy(char*) (gdbmem.cpp:14)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668==  Address 0x5204080 is 16 bytes after a block of size 48 in arena "client"
+==10668== 
+this is a memory debug program!
+arry[0]:1
+arry[1]:2
+arry[2]:3
+arry[3]:4
+arry[4]:5
+arry[5]:6
+arry[6]:7
+arry[7]:8
+arry[8]:9
+arry[9]:10
+arry[11]:-623874025
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E8890E: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Use of uninitialised value of size 8
+==10668==    at 0x4E84711: _itoa_word (_itoa.c:180)
+==10668==    by 0x4E8812C: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E84718: _itoa_word (_itoa.c:180)
+==10668==    by 0x4E8812C: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E881AF: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E87C59: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E87CE2: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+```
+
+main函数45行，memcpy(ptmp, ptmp2, 20);读取已经被释放的内存，导致memcheck报错。
+
+```
+==10668== Invalid write of size 8
+==10668==    at 0x4C326CB: memcpy@@GLIBC_2.14 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008FE: main (gdbmem.cpp:47)
+==10668==  Address 0x5204040 is 0 bytes inside a block of size 33 free'd
+==10668==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008D0: main (gdbmem.cpp:44)
+==10668==  Block was alloc'd at
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+==10668== Invalid write of size 2
+==10668==    at 0x4C32723: memcpy@@GLIBC_2.14 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008FE: main (gdbmem.cpp:47)
+==10668==  Address 0x5204050 is 16 bytes inside a block of size 33 free'd
+==10668==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008D0: main (gdbmem.cpp:44)
+==10668==  Block was alloc'd at
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+==10668== Invalid read of size 1
+==10668==    at 0x4ED0760: strchrnul (strchr.S:24)
+==10668==    by 0x4E87207: __find_specmb (printf-parse.h:108)
+==10668==    by 0x4E87207: vfprintf (vfprintf.c:1312)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x40090F: main (gdbmem.cpp:48)
+==10668==  Address 0x5204040 is 0 bytes inside a block of size 33 free'd
+==10668==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008D0: main (gdbmem.cpp:44)
+==10668==  Block was alloc'd at
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+==10668== Invalid read of size 1
+==10668==    at 0x4E8741A: vfprintf (vfprintf.c:1324)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x40090F: main (gdbmem.cpp:48)
+==10668==  Address 0x5204040 is 0 bytes inside a block of size 33 free'd
+==10668==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008D0: main (gdbmem.cpp:44)
+==10668==  Block was alloc'd at
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+0x40097d==10668== 
+==10668== FILE DESCRIPTORS: 3 open at exit.
+==10668== Open file descriptor 2: /dev/pts/4
+==10668==    <inherited from parent>
+==10668== 
+==10668== Open file descriptor 1: /dev/pts/4
+==10668==    <inherited from parent>
+==10668== 
+==10668== Open file descriptor 0: /dev/pts/4
+==10668==    <inherited from parent>
+==10668== 
+==10668== 
+==10668== HEAP SUMMARY:
+==10668==     in use at exit: 100 bytes in 1 blocks
+==10668==   total heap usage: 3 allocs, 2 frees, 1,157 bytes allocated
+==10668== 
+==10668== 100 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400888: main (gdbmem.cpp:38)
+==10668== 
+==10668== LEAK SUMMARY:
+==10668==    definitely lost: 100 bytes in 1 blocks
+==10668==    indirectly lost: 0 bytes in 0 blocks
+==10668==      possibly lost: 0 bytes in 0 blocks
+==10668==    still reachable: 0 bytes in 0 blocks
+==10668==         suppressed: 0 bytes in 0 blocks
+==10668== 
+==10668== For counts of detected and suppressed errors, rerun with: -v
+==10668== Use --track-origins=yes to see where uninitialised values come from
+==10668== ERROR SUMMARY: 37 errors from 15 contexts (suppressed: 0 from 0)
+```
+
+#### 2.2.3 memcheck检测结果分析
+
+- memcheck的LEAK SUMMARY输出结果将内存泄漏分为以下几种情况：
+- definitely lost:明确地已经泄漏了，因为在程序运行完的时候，没有指针指向它, 指向它的指针在程序中丢失了
+- indirectly lost:间接丢失。当使用了含有指针成员的类或结构时可能会报这个错误。这类错误无需直接修复，他们总是与”definitely lost”一起出现，只要修复”definitely lost”即可。
+- possibly lost:发现了一个指向某块内存中部的指针，而不是指向内存块头部。这种指针一般是原先指向内存块头部，后来移动到了内存块的中部，还有可能该指针和该内存根本就没有关系，检测工具只是怀疑有内存泄漏。
+- still reachable:可以访问，未丢失但也未释放
+- suppressed:已被解决。出现了内存泄露但系统自动处理了。可以无视这类错误。
+- 内存泄漏概述：
+
+```shell
+==10668== LEAK SUMMARY:
+==10668==    definitely lost: 100 bytes in 1 blocks
+==10668==    indirectly lost: 0 bytes in 0 blocks
+==10668==      possibly lost: 0 bytes in 0 blocks
+==10668==    still reachable: 0 bytes in 0 blocks
+==10668==         suppressed: 0 bytes in 0 blocks
+```
+
+此处只有100个字节的内存泄漏。
+
+```shell
+==10668== Invalid write of size 8
+==10668==    at 0x4C3453F: memset (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x40075D: stringcopy(char*) (gdbmem.cpp:13)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668==  Address 0x5204060 is 32 bytes inside a block of size 33 alloc'd
+```
+
+根据错误提示，stringcopy 函数13行，即memset(pdst, 0, len  *2);申请了len的数据长度，memset的时候却使用了2*len的数据长度，内存写溢出了。
+
+```
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+==10668== Invalid write of size 1
+==10668==    at 0x4C34558: memset (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x40075D: stringcopy(char*) (gdbmem.cpp:13)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668==  Address 0x5204080 is 16 bytes after a block of size 48 in arena "client"
+```
+
+ stringcopy 函数13行，即memset(pdst, 0, len*2);申请了len的数据长度，memset的时候却使用了2*len的数据长度，内存写溢出。相同语句的内存写溢出，却报了两个错误，原因笔者目前也还没有弄明白，如果有大虾指点，不胜感激。
+
+```
+==10668== 
+==10668== Invalid write of size 8
+==10668==    at 0x4C326CB: memcpy@@GLIBC_2.14 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400778: stringcopy(char*) (gdbmem.cpp:14)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668==  Address 0x5204060 is 32 bytes inside a block of size 33 alloc'd
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+==10668== Invalid write of size 2
+==10668==    at 0x4C32723: memcpy@@GLIBC_2.14 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400778: stringcopy(char*) (gdbmem.cpp:14)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668==  Address 0x5204080 is 16 bytes after a block of size 48 in arena "client"
+```
+
+stringcopy 函数13行，即memcpy(pdst, psrc, len*2);申请了len的数据长度，memset的时候却使用了2*len的数据长度，内存写溢出。
+
+```
+==10668== 
+this is a memory debug program!
+arry[0]:1
+arry[1]:2
+arry[2]:3
+arry[3]:4
+arry[4]:5
+arry[5]:6
+arry[6]:7
+arry[7]:8
+arry[8]:9
+arry[9]:10
+arry[11]:-623874025
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E8890E: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Use of uninitialised value of size 8
+==10668==    at 0x4E84711: _itoa_word (_itoa.c:180)
+==10668==    by 0x4E8812C: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E84718: _itoa_word (_itoa.c:180)
+==10668==    by 0x4E8812C: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E881AF: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E87C59: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+==10668== 
+==10668== Conditional jump or move depends on uninitialised value(s)
+==10668==    at 0x4E87CE2: vfprintf (vfprintf.c:1631)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x4008E6: main (gdbmem.cpp:45)
+```
+
+main函数45行，printf("%p", pwildptr);读取未初始化的野指针
+
+```
+==10668== 
+==10668== Invalid write of size 8
+==10668==    at 0x4C326CB: memcpy@@GLIBC_2.14 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008FE: main (gdbmem.cpp:47)
+==10668==  Address 0x5204040 is 0 bytes inside a block of size 33 free'd
+==10668==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008D0: main (gdbmem.cpp:44)
+==10668==  Block was alloc'd at
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+==10668== Invalid write of size 2
+==10668==    at 0x4C32723: memcpy@@GLIBC_2.14 (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008FE: main (gdbmem.cpp:47)
+==10668==  Address 0x5204050 is 16 bytes inside a block of size 33 free'd
+==10668==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008D0: main (gdbmem.cpp:44)
+==10668==  Block was alloc'd at
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+```
+
+main函数47行，memcpy(ptmp, ptmp2, 20);写入已经释放的内存
+
+```
+==10668== 
+==10668== Invalid read of size 1
+==10668==    at 0x4ED0760: strchrnul (strchr.S:24)
+==10668==    by 0x4E87207: __find_specmb (printf-parse.h:108)
+==10668==    by 0x4E87207: vfprintf (vfprintf.c:1312)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x40090F: main (gdbmem.cpp:48)
+==10668==  Address 0x5204040 is 0 bytes inside a block of size 33 free'd
+==10668==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008D0: main (gdbmem.cpp:44)
+==10668==  Block was alloc'd at
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+==10668== 
+==10668== Invalid read of size 1
+==10668==    at 0x4E8741A: vfprintf (vfprintf.c:1324)
+==10668==    by 0x4E8F898: printf (printf.c:33)
+==10668==    by 0x40090F: main (gdbmem.cpp:48)
+==10668==  Address 0x5204040 is 0 bytes inside a block of size 33 free'd
+==10668==    at 0x4C2EDEB: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x4008D0: main (gdbmem.cpp:44)
+==10668==  Block was alloc'd at
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400740: stringcopy(char*) (gdbmem.cpp:12)
+==10668==    by 0x40087A: main (gdbmem.cpp:36)
+```
+
+main函数47行，printf(ptmp);写入已经释放的内存
+
+```
+0x40097d==10668== 
+==10668== FILE DESCRIPTORS: 3 open at exit.
+==10668== Open file descriptor 2: /dev/pts/4
+==10668==    <inherited from parent>
+==10668== 
+==10668== Open file descriptor 1: /dev/pts/4
+==10668==    <inherited from parent>
+==10668== 
+==10668== Open file descriptor 0: /dev/pts/4
+==10668==    <inherited from parent>
+```
+
+Linux为了实现一切皆文件的设计哲学，不仅将数据抽象成了文件，也将一切操作和资源抽象成了文件，比如说硬件设备，socket，磁盘，进程，线程等。这样的设计将系统的所有动作都统一起来，实现了对系统的原子化操作，大大降低了维护和操作的难度。
+
+```
+==10668== 
+==10668== 
+==10668== HEAP SUMMARY:
+==10668==     in use at exit: 100 bytes in 1 blocks
+==10668==   total heap usage: 3 allocs, 2 frees, 1,157 bytes allocated
+==10668== 
+==10668== 100 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==10668==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10668==    by 0x400888: main (gdbmem.cpp:38)
+==10668== 
+```
+
+内存泄漏概述，3次内存分配，两次释放。已经有100个字节的内存已经确定泄漏。泄漏的内存分配于38行，char *ptmp2 = (char*)malloc(100);至此，内存泄漏检测完毕。
 
