@@ -6,11 +6,22 @@
 
 [第二章 第一讲  Python入门](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class1)
 
+> 1.1  [Python发展史]()
+> 1.2  [常用开发工具]()
+> 1.3  [注释]()
+> 1.4  [变量名]()
+
 ```
 了解Python的由来和发展史。学会Python的变量命名与Python语法中的注释。
 ```
 
 [第二章 第二讲  Python数据类型与转换](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class2)
+
+> 2.1  [Number类型]()
+> 2.2  [字符串类型]()
+> 2.3  [其它数据类型]()
+> 2.4  [数据类型转换]()
+
 
 ```
 记住并理解Python中常用的6大基本数据类型（数值，字符串，列表，元组，集合，字典）并掌握6大基本类型之间的相互转换。
