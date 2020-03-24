@@ -32,7 +32,7 @@
 > 3.1  [运算符（1）](https://www.bilibili.com/video/BV137411U7DF)
 > 3.2  [运算符（2）](https://www.bilibili.com/video/BV157411U7gL)
 > 3.3  [运算符（3）](https://www.bilibili.com/video/BV1V7411U7zo)
-> 3.4  [运算符（4）]()
+> 3.4  [运算符（4）](https://www.bilibili.com/video/BV1V7411U7W6)
 
 ```
 认识并掌握运算符（算术运算符与比较运算符）
@@ -40,9 +40,9 @@
 
 [第二章 第四讲 流程控制与循环结构](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class4)
 
-> 4.1  [流程控制与分支结构]()
+> 4.1  [流程控制与分支结构](https://www.bilibili.com/video/BV1d741117gR)
 > 4.2  [循环结构]()
-> 4.3  [其他流程控制语句]()
+> 4.3  [其他流程控制语句](https://www.bilibili.com/video/BV1R741117ou)
 
 ```
 学会if...else...分支结构，for循环与while循环
@@ -50,10 +50,10 @@
 
 [第二章 第五讲 函数初级](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class5)
 
-> 5.1  [函数定义]()
-> 5.2  [参数（1）]()
-> 5.3  [参数（2）]()
-> 5.4  [函数的文档和返回值]()
+> 5.1  [函数定义](https://www.bilibili.com/video/BV1Q741117Kk)
+> 5.2  [参数（1）](https://www.bilibili.com/video/BV1Q741117gt)
+> 5.3  [参数（2）](https://www.bilibili.com/video/BV1Q7411175b)
+> 5.4  [函数的文档和返回值](https://www.bilibili.com/video/BV1Q741117n4)
 
 ```
 认识函数，学会定义一个函数，逼格对函数的参数与返回值有一定的理解。
@@ -61,11 +61,11 @@
 
 [第二章 第六讲 函数高级](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class6)
 
-> 6.1  [变量作用域]()
-> 6.2  [nonlocal关键字]()
-> 6.3  [递归函数]()
-> 6.4  [偏函数]()
-> 6.5  [lambda表达式]()
+> 6.1  [变量作用域](https://www.bilibili.com/video/BV1D741117Sb)
+> 6.2  [nonlocal关键字](https://www.bilibili.com/video/BV1D741117m6)
+> 6.3  [递归函数](https://www.bilibili.com/video/BV1X741117zn)
+> 6.4  [偏函数](https://www.bilibili.com/video/BV1X741117mB)
+> 6.5  [lambda表达式](https://www.bilibili.com/video/BV1X741117Aa)
 
 ```
 全局变量与局部变量的区别与使用，递归函数，偏函数的认识与应用。匿名函数lambda表达式的应用。
