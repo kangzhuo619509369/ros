@@ -6,10 +6,10 @@
 
 [第二章 第一讲  Python入门](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class1)
 
-> 1.1  [Python发展史]()
-> 1.2  [常用开发工具]()
-> 1.3  [注释]()
-> 1.4  [变量名]()
+> 1.1  [Python发展史](https://www.bilibili.com/video/BV1v7411m74m)
+> 1.2  [常用开发工具](https://www.bilibili.com/video/BV1v7411m73v)
+> 1.3  [注释](https://www.bilibili.com/video/BV1e7411m7qm)
+> 1.4  [变量名](https://www.bilibili.com/video/BV1e7411m7s6)
 
 ```
 了解Python的由来和发展史。学会Python的变量命名与Python语法中的注释。
