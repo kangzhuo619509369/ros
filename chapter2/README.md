@@ -29,11 +29,20 @@
 
 [第二章 第三讲 运算与运算符](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class3)
 
+> 3.1  [运算符（1）]()
+> 3.2  [运算符（2）]()
+> 3.3  [运算符（3）]()
+> 3.4  [运算符（4）]()
+
 ```
 认识并掌握运算符（算术运算符与比较运算符）
 ```
 
 [第二章 第四讲 流程控制与循环结构](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class4)
+
+> 4.1  [流程控制与分支结构]()
+> 4.2  [循环结构]()
+> 4.3  [其他流程控制语句]()
 
 ```
 学会if...else...分支结构，for循环与while循环
@@ -41,11 +50,22 @@
 
 [第二章 第五讲 函数初级](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class5)
 
+> 5.1  [函数定义]()
+> 5.2  [参数（1）]()
+> 5.3  [参数（2）]()
+> 5.4  [函数的文档和返回值]()
+
 ```
 认识函数，学会定义一个函数，逼格对函数的参数与返回值有一定的理解。
 ```
 
 [第二章 第六讲 函数高级](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class6)
+
+> 6.1  [变量作用域]()
+> 6.2  [nonlocal关键字]()
+> 6.3  [递归函数]()
+> 6.4  [偏函数]()
+> 6.5  [lambda表达式]()
 
 ```
 全局变量与局部变量的区别与使用，递归函数，偏函数的认识与应用。匿名函数lambda表达式的应用。
