@@ -20,7 +20,7 @@
 > 2.1  [Number类型](https://www.bilibili.com/video/BV127411m7j3)
 > 2.2  [字符串类型](https://www.bilibili.com/video/BV127411m7gH)
 > 2.3  [其它数据类型](https://www.bilibili.com/video/BV1m7411m7x9)
-> 2.4  [数据类型转换]()
+> 2.4  [数据类型转换](https://www.bilibili.com/video/BV127411m7j3)
 
 
 ```
@@ -29,9 +29,9 @@
 
 [第二章 第三讲 运算与运算符](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class3)
 
-> 3.1  [运算符（1）]()
-> 3.2  [运算符（2）]()
-> 3.3  [运算符（3）]()
+> 3.1  [运算符（1）](https://www.bilibili.com/video/BV137411U7DF)
+> 3.2  [运算符（2）](https://www.bilibili.com/video/BV157411U7gL)
+> 3.3  [运算符（3）](https://www.bilibili.com/video/BV1V7411U7zo)
 > 3.4  [运算符（4）]()
 
 ```
