@@ -17,9 +17,9 @@
 
 [第二章 第二讲  Python数据类型与转换](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class2)
 
-> 2.1  [Number类型]()
-> 2.2  [字符串类型]()
-> 2.3  [其它数据类型]()
+> 2.1  [Number类型](https://www.bilibili.com/video/BV127411m7j3)
+> 2.2  [字符串类型](https://www.bilibili.com/video/BV127411m7gH)
+> 2.3  [其它数据类型](https://www.bilibili.com/video/BV1m7411m7x9)
 > 2.4  [数据类型转换]()
 
 
