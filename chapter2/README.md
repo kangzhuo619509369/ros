@@ -77,6 +77,9 @@
 > 7.2  [字符串函数（1）](https://www.bilibili.com/video/BV1n741127KR)
 > 7.3  [字符串函数（2）](https://www.bilibili.com/video/BV1n741127VS)
 > 7.4  [字符串函数（3）](https://www.bilibili.com/video/BV1J741127YW)
+> 7.5  [字符串格式化]()
+> 7.6  [字符集与bytes类型](https://www.bilibili.com/video/BV1C7411274s)
+
 
 ```
 掌握字符串函数，格式化字符串，内建函数等相关方法。
@@ -84,20 +87,50 @@
 
 [第二章 第八讲 列表操作](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class8)
 
+> 8.1  [列表基本操作](https://www.bilibili.com/video/BV1h7411y74h/)
+> 8.2  [列表的分片赋值与运算](https://www.bilibili.com/video/BV1h7411y7hd/)
+> 8.3  [列表的遍历及推导式](https://www.bilibili.com/video/BV1h7411y77U/)
+> 8.4  [列表常用函数](https://www.bilibili.com/video/BV187411y7Xe/)
+
 ```
 操作列表的常用函数，列表的分片赋值，对列表进行遍历，了解并使用列表推导式
 ```
 [第二章 第九讲 元组和字典](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class9)
+
+> 9.1  [字典的定义及操作](https://www.bilibili.com/video/BV1z7411y7Pt/)
+> 9.2  [字典的遍历及推导式和格式化字符串](https://www.bilibili.com/video/BV1z7411y7Lp/)
+> 9.3  [字典专用函数](https://www.bilibili.com/video/BV1r7411y7Ge/)
+> 9.4  [元祖](https://www.bilibili.com/video/BV1r7411y7nH/)
 
 ```
 深入了解元组和字典，各自的特性与相应操作函数（方法）
 ```
 [第二章 第十讲 集合和文件](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class10)
 
+> 10.1  [集合的创建与操作](https://www.bilibili.com/video/BV197411y7QQ/)
+> 10.2  [集合序列操作，遍历及推导式](https://www.bilibili.com/video/BV1d7411y7Rt/)
+> 10.3  [集合专用函数](https://www.bilibili.com/video/BV1U7411y7Ra/)
+> 10.4  [冰冻集合](https://www.bilibili.com/video/BV1Q7411y7F4/)
+> 10.4  [xx]()
+> 10.6  [input函数]()
+
 ```
 集合的基本操作与方法。认识并理解冰冻集合。认识Python中的内建函数。掌握文件的操作。
 ```
 [第二章 第十一讲 面向对象](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class11)
+
+> 11.1  [面向对象简介](https://www.bilibili.com/video/BV1c7411178E/)
+> 11.2  [类和对象的概念及关系](https://www.bilibili.com/video/BV1c741117BG/)
+> 11.3  [类的书写和实例化](https://www.bilibili.com/video/BV1c741117gH/)
+> 11.4  [类和对象成员的访问](https://www.bilibili.com/video/BV1eA41187pN/)
+> 11.5  [mixin设计模式的应用（多继承应用场景）](https://www.bilibili.com/video/BV1nz411b7cy/)
+> 11.6  [受保护的封装](https://www.bilibili.com/video/BV1wT4y1G7nf/)
+> 11.7  [魔术方法1（__new__,__init__,__del__）]()
+> 11.8  [魔术方法2（__call__,__len__）]()
+> 11.9  [魔术方法3（__str__和__repr__）]()
+> 11.10  [魔术方法4（__bool__，__format__）]()
+> 11.11  [魔术方法5（__getattribute__，__getattr__,__setattr__）
+]()
 
 ```
 理解面向对象编程思想。类的定义与应用，面向对象的三大特性，mixin设计模式，Python中的魔术方法。
