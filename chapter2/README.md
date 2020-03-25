@@ -111,7 +111,7 @@
 > 10.2  [集合序列操作，遍历及推导式](https://www.bilibili.com/video/BV1d7411y7Rt/)
 > 10.3  [集合专用函数](https://www.bilibili.com/video/BV1U7411y7Ra/)
 > 10.4  [冰冻集合](https://www.bilibili.com/video/BV1Q7411y7F4/)
-> 10.4  [xx]()
+> 10.4  [内建函数归类与介绍]()
 > 10.6  [input函数]()
 
 ```
