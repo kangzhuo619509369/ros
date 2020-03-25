@@ -73,6 +73,11 @@
 
 [第二章 第七讲 字符串操作](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class7)
 
+> 7.1  [字符串操作](https://www.bilibili.com/video/BV1n7411278w)
+> 7.2  [字符串函数（1）](https://www.bilibili.com/video/BV1n741127KR)
+> 7.3  [字符串函数（2）](https://www.bilibili.com/video/BV1n741127VS)
+> 7.4  [字符串函数（3）](https://www.bilibili.com/video/BV1J741127YW)
+
 ```
 掌握字符串函数，格式化字符串，内建函数等相关方法。
 ```
