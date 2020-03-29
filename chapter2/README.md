@@ -41,7 +41,7 @@
 [第二章 第四讲 流程控制与循环结构](https://github.com/YunxiangLuo/ros/tree/master/chapter2/class4)
 
 > 4.1  [流程控制与分支结构](https://www.bilibili.com/video/BV1d741117gR)
-> 4.2  [循环结构]()
+> 4.2  [循环结构](https://www.bilibili.com/video/BV1R741117C8)
 > 4.3  [其他流程控制语句](https://www.bilibili.com/video/BV1R741117ou)
 
 ```
@@ -77,9 +77,8 @@
 > 7.2  [字符串函数（1）](https://www.bilibili.com/video/BV1n741127KR)
 > 7.3  [字符串函数（2）](https://www.bilibili.com/video/BV1n741127VS)
 > 7.4  [字符串函数（3）](https://www.bilibili.com/video/BV1J741127YW)
-> 7.5  [字符串格式化]()
+> 7.5  [字符串格式化](https://www.bilibili.com/video/BV1gT4y157ZU)
 > 7.6  [字符集与bytes类型](https://www.bilibili.com/video/BV1C7411274s)
-
 
 ```
 掌握字符串函数，格式化字符串，内建函数等相关方法。
@@ -111,8 +110,8 @@
 > 10.2  [集合序列操作，遍历及推导式](https://www.bilibili.com/video/BV1d7411y7Rt/)
 > 10.3  [集合专用函数](https://www.bilibili.com/video/BV1U7411y7Ra/)
 > 10.4  [冰冻集合](https://www.bilibili.com/video/BV1Q7411y7F4/)
-> 10.4  [内建函数归类与介绍]()
-> 10.6  [input函数]()
+> 10.4  [内建函数归类与介绍](https://www.bilibili.com/video/BV1ua4y1t7BT)
+> 10.6  [input函数](https://www.bilibili.com/video/BV1Qt4y1m7Pu)
 
 ```
 集合的基本操作与方法。认识并理解冰冻集合。认识Python中的内建函数。掌握文件的操作。
@@ -125,12 +124,12 @@
 > 11.4  [类和对象成员的访问](https://www.bilibili.com/video/BV1eA41187pN/)
 > 11.5  [mixin设计模式的应用（多继承应用场景）](https://www.bilibili.com/video/BV1nz411b7cy/)
 > 11.6  [受保护的封装](https://www.bilibili.com/video/BV1wT4y1G7nf/)
-> 11.7  [魔术方法1（__new__,__init__,__del__）]()
-> 11.8  [魔术方法2（__call__,__len__）]()
-> 11.9  [魔术方法3（__str__和__repr__）]()
-> 11.10  [魔术方法4（__bool__，__format__）]()
+> 11.7  [魔术方法1（__new__,__init__,__del__）](https://www.bilibili.com/video/BV11k4y1d7HL)
+> 11.8  [魔术方法2（__call__,__len__）](https://www.bilibili.com/video/BV1iC4y147iw)
+> 11.9  [魔术方法3（__str__和__repr__）](https://www.bilibili.com/video/BV1rZ4y1j7pu)
+> 11.10  [魔术方法4（__bool__，__format__）](https://www.bilibili.com/video/BV1R64y1M7Qe)
 > 11.11  [魔术方法5（__getattribute__，__getattr__,__setattr__）
-]()
+](https://www.bilibili.com/video/BV11K4y1C7TB)
 
 ```
 理解面向对象编程思想。类的定义与应用，面向对象的三大特性，mixin设计模式，Python中的魔术方法。
